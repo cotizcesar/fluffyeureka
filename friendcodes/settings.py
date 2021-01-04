@@ -53,9 +53,6 @@ INSTALLED_APPS = [
     # django-storages: Application Added.
     # https://django-storages.readthedocs.io/en/latest/index.html#installation
     "storages",
-    # django-rest-framework: Application Added.
-    # https://www.django-rest-framework.org/#installation
-    "rest_framework",
     "core",
 ]
 SITE_ID = 1
