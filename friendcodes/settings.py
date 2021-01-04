@@ -65,7 +65,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-ROOT_URLCONF = "ordis.urls"
+ROOT_URLCONF = "friendcodes.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -89,7 +89,7 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by e-mail
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
-WSGI_APPLICATION = "ordis.wsgi.application"
+WSGI_APPLICATION = "friendcodes.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -139,7 +139,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": "ordis-cache",
+        "LOCATION": "friendcodes-cache",
     }
 }
 
