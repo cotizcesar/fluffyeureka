@@ -1,2 +1,2 @@
 # nincodes
-Nintendo Friend Codes Sharer
+Nintendo FC sharer for any game!
