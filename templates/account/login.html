@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% load account socialaccount %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block content %}
+	<div id="signin">
+		<div class="container my-3">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div class="bg-dark p-3 rounded">
+						<div class="py-3">
+							<p class="text-center text-info m-0"><i class="fas fa-sign-in-alt fa-fw fa-5x"></i></p>
+							<h1 class="text-center">{% trans "Sign In" %}</h1>
+							{% if socialaccount_providers %}
+								<p class="small">{% blocktrans with site.name as site_name %}Please sign in with one
+								of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+								for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+								<div class="socialaccount_ballot">
+									<ul class="socialaccount_providers">
+										{% include "socialaccount/snippets/provider_list.html" with process="login" %}
+									</ul>
+									<div class="login-or">{% trans 'or' %}</div>
+								</div>
+								{% include "socialaccount/snippets/login_extra.html" %}
+							{% else %}
+								<p class="small">{% blocktrans %}If you have not created an account yet, then please
+								<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+							{% endif %}
+							<hr>
+						</div>
+						<form class="login" method="POST" action="{% url 'account_login' %}">
+							{% csrf_token %}
+							{% bootstrap_form form %}
+							{% if redirect_field_value %}
+								<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+							{% endif %}
+							{% buttons %}
+								<button type="submit" class="btn btn-info primaryAction">
+									<i class="fas fa-sign-in-alt fa-fw"></i> {% trans "Sign In" %}
+								</button>
+								<a class="btn text-light float-right secondaryAction" href="{% url 'account_reset_password' %}"><i class="far fa-question-circle fa-fw"></i> {% trans "Forgot Password?" %}</a>
+							{% endbuttons %}
+						</form>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

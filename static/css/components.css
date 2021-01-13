@@ -1,0 +1,21 @@
+/* Component: Pagination Simple (Explore: Users, Posts) EM */
+.pagination-block {
+    display: grid;
+    justify-items: center;
+    padding: 15px 0;
+}
+.pagination-block .page, .pagination-block .page a {
+    font-size: 1.077em;
+    color: #fff;
+    font-weight: 500;
+    display: inline-block;
+    padding: 2px 10px 4px 10px;
+    text-decoration: none;
+}
+.pagination-block .current {
+    background: #fff;
+    border-radius: 50%;
+    color: #282c37;
+    cursor: default;
+    margin: 0 10px;
+}

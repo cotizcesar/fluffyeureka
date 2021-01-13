@@ -23,3 +23,8 @@ from django.contrib.auth.models import User
 
 class Index(TemplateView):
     template_name = "core/index.html"
+
+
+class Members(ListView):
+    model = User
+    paginate_by = 21

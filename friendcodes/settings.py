@@ -185,7 +185,7 @@ BOOTSTRAP4 = {
 
 # Django: Redirect on Login
 # https://docs.djangoproject.com/en/3.1/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "feed"
+LOGIN_REDIRECT_URL = "index"
 
 # django-allauth: General Configuration
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
@@ -197,7 +197,7 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"  # Change for https in Production
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
-ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_REDIRECT_URL = "index"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
