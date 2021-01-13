@@ -2,10 +2,53 @@
 {% load thumbnail %}
 {% load static %}
 {% load custom_filters %}
-{% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
-<link rel="stylesheet" href="{% static 'css/components.css' %}">
-{% endblock %}
 {% block content %}
-<h1 class="text-center text-dark p-5">Hello, world!</h1>
+    <div class="home">
+        <div class="container my-3">
+            {% if not user.is_authenticated %}
+            <div class="jumbotron bg-dark text-light rounded w-100 my-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="display-4">Hello gamer!</h1>
+                            <p class="lead">This site was created in order to share friend codes for the nintendo switch platform.</p>
+                            <hr class="my-4">
+                            <p>If you want to start sharing, you need to create an account and fill out some necessary fields to start sharing.</p>
+                            <a class="btn btn-info btn-lg" href="{% url 'account_signup' %}" role="button"><i class="fas fa-sign-in-alt fa-fw mr-1"></i> Sign up</a>
+                        </div>
+                    </div>                    
+                </div> 
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="bg-dark text-light rounded p-3">
+                        <h3><i class="fas fa-th-large fa-fw text-info mr-1"></i> Latest codes</h3>
+                        <p>These are the last friend codes published with the option to view them publicly.</p>
+                        <div class="row mt-5">
+                            <div class="col-md-6">
+                                <h5><i class="fas fa-list-ul fa-fw text-info mr-1"></i> Lists By Game</h5>
+                                <hr>
+                            </div>
+                            <div class="col-md-6">
+                                <h5><i class="fas fa-users fa-fw text-info mr-1"></i> By User</h5>
+                                <hr>
+                                <div class="media user-thumb">
+                                    <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="...">
+                                    <div class="media-body">
+                                        <h6 class="my-0">Cesar Cotiz</h6>
+                                        <p class="mb-0">SW-5842-0377-2410</p>
+                                    </div>
+                                    <div class="media-body text-right small mt-1">
+                                        <h6 class="my-0">Favorite game</h6>
+                                        <p class="mb-0">Animal Crossing: New Horizons</p>
+                                    </div>
+                                </div>            
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
 {% endblock %}
