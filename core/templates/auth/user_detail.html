@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load static %}
 {% load custom_filters %}
+{% block title %}{% if profile.get_full_name %}{{ profile.get_full_name }}{% else %}{{ profile.username }}{% endif %} (@{{ profile.username }}) - Friendcodes{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/components.css' %}">
 {% endblock %}
