@@ -20,6 +20,9 @@ from django.db.models import Count
 #! Django: Importing User Model
 from .models import User, UserProfile, Connection, Post
 
+#! Core: Importing forms
+from .forms import PostForm
+
 
 class Index(TemplateView):
     template_name = "core/index.html"
@@ -38,7 +41,9 @@ class UserProfileDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(user=self.get_object())
+        context["posts"] = Post.objects.filter(user=self.get_object()).order_by(
+            "-date_created"
+        )
         context["posts_count"] = Post.objects.filter(user=self.get_object()).count()
 
         #! Validation to show the Follow / Unfollow button.
@@ -126,3 +131,15 @@ def unfollow_view(request, *args, **kwargs):
     return HttpResponseRedirect(
         reverse_lazy("userprofile", kwargs={"username": following.username})
     )
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    form_class = PostForm
+    template_name = "core/post_create.html"
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        obj.date_created = timezone.now()
+        obj.save()
+        return redirect("index")
