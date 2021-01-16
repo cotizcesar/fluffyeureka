@@ -3,7 +3,6 @@
 {% load thumbnail %}
 {% load static %}
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/explore.css' %}">
 <link rel="stylesheet" href="{% static 'css/components.css' %}">
 {% endblock %}
 {% block content %}
@@ -21,7 +20,7 @@
 									<div class="col-md-6">
 										<img class="header img-fluid rounded-top" src="{{ object.userprofile.header|thumbnail_url:'524x196'|default:'https://via.placeholder.com/524x196' }}" alt="{% if object.get_full_name %}{{ object.get_full_name }} - @{{ object.username }}{% else %}@{{ object.username }} header.{% endif %}">
 										<div class="media mb-3 bg-darker p-3 rounded-bottom">
-											<img src="{{ object.userprofile.avatar|thumbnail_url:'48x48'|default:'https://via.placeholder.com/48' }}" class="rounded-circle mr-3" alt="{% if object.get_full_name %}{{ object.get_full_name }} - @{{ object.username }}{% else %}@{{ object.username }} avatar.{% endif %}">
+											<img src="{{ object.userprofile.avatar|thumbnail_url:'48x48'|default:'https://via.placeholder.com/48' }}" class="rounded mr-3" alt="{% if object.get_full_name %}{{ object.get_full_name }} - @{{ object.username }}{% else %}@{{ object.username }} avatar.{% endif %}">
 											<div class="media-body">
 											  <a href="#" class="h6 mt-1 mb-0">{% if object.get_full_name %}{{ object.get_full_name }}{% else %}{{ object.username }}{% endif %}</a>
 											  <p class="text-muted small my-0">@{{ object.username }}</p>

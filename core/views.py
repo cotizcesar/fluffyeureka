@@ -18,7 +18,7 @@ from django.contrib import messages
 from django.db.models import Count
 
 #! Django: Importing User Model
-from django.contrib.auth.models import User
+from .models import User, UserProfile, Connection, Post
 
 
 class Index(TemplateView):
@@ -27,4 +27,107 @@ class Index(TemplateView):
 
 class Members(ListView):
     model = User
-    paginate_by = 21
+    paginate_by = 20
+
+
+class UserProfileDetailView(DetailView):
+    model = User
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    context_object_name = "profile"
+
+    def get_context_data(self, **kwargs):
+        context = super(UserProfileDetailView, self).get_context_data(**kwargs)
+        """
+        context["posts"] = Post.objects.filter(user=self.get_object())
+        context["posts_count"] = Post.objects.filter(user=self.get_object()).count()
+        context["featured_post"] = Post.objects.filter(featured=True).order_by(
+            "-date_created"
+        )[:1]
+        """
+
+        #! Validation to show the Follow / Unfollow button.
+        username = self.kwargs["username"]
+        context["username"] = username
+        context["user"] = self.request.user
+
+        #! Following / Followers counters
+        context["following_count"] = Connection.objects.filter(
+            follower__username=username
+        ).count()
+        context["followers_count"] = Connection.objects.filter(
+            following__username=username
+        ).count()
+
+        if username is not context["user"].username:
+            result = Connection.objects.filter(
+                follower__username=context["user"].username
+            ).filter(following__username=username)
+            context["connected"] = True if result else False
+        return context
+
+
+# Follow: hand-made system, its a better and modified copy
+# https://github.com/benigls/instagram
+@login_required
+def follow_view(request, *args, **kwargs):
+    try:
+        follower = User.objects.get(username=request.user)
+        following = User.objects.get(username=kwargs["username"])
+
+    except User.DoesNotExist:
+        messages.warning(
+            request, "{} is not a registered user.".format(kwargs["username"])
+        )
+        return HttpResponseRedirect(reverse_lazy("feed"))
+
+    if follower == following:
+        messages.warning(request, "You cannot follow yourself.")
+
+    else:
+        _, created = Connection.objects.get_or_create(
+            follower=follower, following=following
+        )
+
+        if created:
+            messages.success(
+                request, "You've successfully followed {}.".format(following.username)
+            )
+
+        else:
+            messages.warning(
+                request, "You've already followed {}.".format(following.username)
+            )
+    return HttpResponseRedirect(
+        reverse_lazy("userprofile", kwargs={"username": following.username})
+    )
+
+
+# Unfollow: hand-made system, its a better and modified copy
+# https://github.com/benigls/instagram
+@login_required
+def unfollow_view(request, *args, **kwargs):
+    try:
+        follower = User.objects.get(username=request.user)
+        following = User.objects.get(username=kwargs["username"])
+
+        if follower == following:
+            messages.warning(request, "You cannot unfollow yourself.")
+
+        else:
+            unfollow = Connection.objects.get(follower=follower, following=following)
+            unfollow.delete()
+            messages.success(
+                request, "You've just unfollowed {}.".format(following.username)
+            )
+    except User.DoesNotExist:
+        messages.warning(
+            request, "{} is not a registered user.".format(kwargs["username"])
+        )
+        return HttpResponseRedirect(reverse_lazy("feed"))
+
+    except Connection.DoesNotExist:
+        messages.warning(request, "You didn't follow {0}.".format(following.username))
+    return HttpResponseRedirect(
+        reverse_lazy("userprofile", kwargs={"username": following.username})
+    )
