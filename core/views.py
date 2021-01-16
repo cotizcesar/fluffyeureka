@@ -38,13 +38,8 @@ class UserProfileDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
-        """
         context["posts"] = Post.objects.filter(user=self.get_object())
         context["posts_count"] = Post.objects.filter(user=self.get_object()).count()
-        context["featured_post"] = Post.objects.filter(featured=True).order_by(
-            "-date_created"
-        )[:1]
-        """
 
         #! Validation to show the Follow / Unfollow button.
         username = self.kwargs["username"]
