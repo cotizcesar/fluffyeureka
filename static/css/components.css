@@ -19,7 +19,7 @@
     cursor: default;
     margin: 0 10px;
 }
-/* Component: Statsmenu (Userprofile) EM */
+/* Component: usermenu (Userprofile) EM */
 .usermenu {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -67,4 +67,8 @@
     font-size: 0.8em;
     display: block;
     color: #9baec8;
+}
+/* Component: Post (Userprofile, Feed) EM */
+.post .text p:last-child {
+    margin-bottom: 0;
 }

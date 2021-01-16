@@ -32,11 +32,11 @@
                                     </small>
                                 </h1>
                                 {% if profile.userprofile.biography %}
-                                    <p class="biography text-muted small">{{ profile.userprofile.biography }}</p>
+                                    <p class="biography text-muted small mb-1">{{ profile.userprofile.biography }}</p>
                                 {% endif %}
                                 {% if profile.userprofile.is_public %}
                                     {% if profile.userprofile.nintendo_switch_code %}
-                                        <span class="badge badge-danger">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
+                                        <span class="badge badge-danger mb-1">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
                                     {% endif %}
                                 {% else %}
                                     {% if user.is_authenticated %}
@@ -96,7 +96,7 @@
                 <div class="col-md-6 offset-md-1">
                     {% if posts %}
                         {% for object in posts %}
-                            a
+                            {% include 'components/post.html' %}
                         {% endfor %}
                     {% else %}
                         <div class="alert alert-info" role="alert">
@@ -105,7 +105,7 @@
                     {% endif %}
                 </div>
                 <div class="col-md-4">
-                    Block for recomendations and more.
+                    Block for recomendations and more. (WIP)
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(
         upload_to="user/avatar", default="user/avatar/default.png", blank=True
     )
-    biography = models.TextField(max_length=280, blank=True)
+    biography = models.TextField(max_length=160, blank=True)
     nintendo_switch_code = models.PositiveBigIntegerField(validators=[MinValueValidator(000000000000), MaxValueValidator(999999999999)], blank=True, null=True)
     is_public = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
@@ -50,7 +50,7 @@ class Connection(models.Model):
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.TextField(max_length=500)
+    text = models.TextField(max_length=280)
     image = models.ImageField(upload_to="user/post", blank=True)
     video = models.URLField(blank=True)
     comment = models.ForeignKey(

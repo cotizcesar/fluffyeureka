@@ -209,9 +209,10 @@ REGISTRATION_OPEN = False  # Change for True in Production
 THUMBNAIL_TRANSPARENCY_EXTENSION = "png"
 THUMBNAIL_ALIASES = {
     "": {
-        "123x123": {"size": (123, 123), "crop": "smart", "upscale": True},
-        "920x517": {"size": (920, 517), "crop": "smart", "upscale": True},
-        "524x294": {"size": (524, 294), "crop": "smart", "upscale": True},
+        "123x123": {"size": (123, 123), "crop": "smart", "upscale": True}, # UserProfile Avatar
+        "920x517": {"size": (920, 517), "crop": "smart", "upscale": True}, # UserProfile Header
+        "524x294": {"size": (524, 294), "crop": "smart", "upscale": True}, # Members Header
+        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True}, # Post Image
         "120x120": {"size": (120, 120), "crop": "smart", "upscale": True},
         "465x": {"size": (465, 0), "crop": "smart", "upscale": True},
         "36x36": {"size": (36, 36), "crop": "smart", "upscale": True},

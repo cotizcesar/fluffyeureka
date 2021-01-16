@@ -7,31 +7,33 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link text-info" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-info" href="#">Feed</a>
-                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-info" href="#">Feed</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link text-info" href="{% url 'members' %}">Members</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ user.username }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'userprofile' user.username %}"><i class="far fa-address-card fa-fw"></i> Profile</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt fa-fw"></i> Log out</a>
-                        </div>
-                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ user.username }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'userprofile' user.username %}"><i class="far fa-address-card fa-fw"></i> Profile</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt fa-fw"></i> Log out</a>
+                            </div>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link mr-2 font-weight-bold" href="{% url 'account_signup' %}"><i class="fas fa-sign-in-alt fa-fw text-info mr-1"></i> Sign up</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link mr-2 font-weight-bold" href="{% url 'account_signup' %}"><i class="fas fa-sign-in-alt fa-fw text-info mr-1"></i> Sign up</a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>
