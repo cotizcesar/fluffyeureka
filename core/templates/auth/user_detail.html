@@ -17,7 +17,7 @@
                     ">
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md-10 offset-md-1">
                     <div class="bg-dark rounded-bottom p-3">
                         <div class="row">
@@ -28,7 +28,7 @@
                                 <h1 class="name h2">
                                     {% if profile.get_full_name %}{{ profile.get_full_name }}{% else %}{{ profile.username }}{% endif %}
                                     <small class="username text-muted">
-                                        @{{ profile.username }}
+                                        @{{ profile.username }} {% if profile.is_superuser %}<i class="fas fa-check-circle fa-fw fa-xs text-primary"></i>{% endif %}
                                     </small>
                                 </h1>
                                 <p class="biography text-muted small mb-1">{{ profile.userprofile.biography }}</p>
@@ -78,6 +78,22 @@
                         </div>
                     </div>
                 </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-7 offset-md-1">
+                    {% if posts %}
+                        {% for object in posts %}
+                            a
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle fa-fw"></i> This user has no posts to display.
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-3">
+                    Block for recomendations and more.
+                </div>
             </div>
         </div>
     </div>
