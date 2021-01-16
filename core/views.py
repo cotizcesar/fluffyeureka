@@ -28,6 +28,20 @@ class Index(TemplateView):
     template_name = "core/index.html"
 
 
+class Feed(LoginRequiredMixin, ListView):
+    model = Post
+    paginate_by = 10
+    template_name = "core/feed.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(Feed, self).get_context_data(**kwargs)
+        context["posts"] = Post.objects.filter(
+            Q(user__in=self.request.user.follower.values("following"))
+            | Q(user=self.request.user)
+        )
+        return context
+
+
 class Members(ListView):
     model = User
     paginate_by = 10
@@ -142,4 +156,4 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         obj.user = self.request.user
         obj.date_created = timezone.now()
         obj.save()
-        return redirect("index")
+        return redirect("feed")

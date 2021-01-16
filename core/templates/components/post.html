@@ -1,3 +1,4 @@
+{% load humanize %}
 {% load thumbnail %}
 <div class="post mb-3">
     {% if object.image %}
@@ -9,12 +10,15 @@
                 <img src="{{ object.user.userprofile.avatar|thumbnail_url:'48x48'|default:'https://via.placeholder.com/48' }}" class="rounded mr-3" alt="{% if object.user.get_full_name %}{{ object.user.get_full_name }} - @{{ object.user.username }}{% else %}@{{ object.user.username }} avatar.{% endif %}">
             </a>
             <div class="media-body">
-                <a href="{% url 'userprofile' object.user.username %}" class="h5 name d-block mb-2">
-                    {% if object.user.get_full_name %}{{ object.user.get_full_name }}{% else %}{{ object.user.username }}{% endif %}
-                    <small class="username text-muted">
-                        @{{ object.user.username }} {% if object.user.is_superuser %}<i class="fas fa-check-circle fa-fw fa-xs text-primary"></i>{% endif %}
-                    </small>
-                </a>
+                <h5 class="name mb-2">
+                    <a href="{% url 'userprofile' object.user.username %}">
+                        {% if object.user.get_full_name %}{{ object.user.get_full_name }}{% else %}{{ object.user.username }}{% endif %}
+                        <small class="username text-muted">
+                            @{{ object.user.username }} {% if object.user.is_superuser %}<i class="fas fa-check-circle fa-fw fa-xs text-primary"></i>{% endif %}
+                        </small>
+                    </a>
+                    <span class="small float-right mt-1"><a class="text-muted small" href="#">{{ object.date_created|naturalday }}</a></span>
+                </h5>
                 <small class="text">
                     {{ object.text|linebreaks }}
                 </small>
