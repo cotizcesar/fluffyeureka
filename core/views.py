@@ -27,7 +27,7 @@ class Index(TemplateView):
 
 class Members(ListView):
     model = User
-    paginate_by = 20
+    paginate_by = 10
 
 
 class UserProfileDetailView(DetailView):
