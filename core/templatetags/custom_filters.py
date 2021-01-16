@@ -28,6 +28,35 @@ def number_formatter(value, num_decimals=2):
 
 
 @register.filter
+def switch_code_formatter(value, type):
+    """
+    Django template filter to convert regular numbers to a
+    cool format (ie: 2K, 434.4K, 33M...)
+    :param value: number
+    :param num_decimals: Number of decimal digits
+    Source: https://gist.github.com/dnmellen/bfc1b3005999aaff3ed4
+    """
+
+    result = None
+
+    try:
+        if value:
+            if type == "switch":
+                value = str(value)
+                value1 = value[0:4]
+                value2 = value[4:8]
+                value3 = value[8:12]
+
+                if value1 and value2 and value3:
+                    result = "SW-" + value1 + "-" + value2 + "-" + value3
+
+    except Exception as e:
+        result = None
+
+    return result
+
+
+@register.filter
 def proper_paginate(paginator, current_page, neighbors=10):
     if paginator.num_pages > 2 * neighbors:
         start_index = max(1, current_page - neighbors)
@@ -115,5 +144,6 @@ def youtube_embed_url(value):
         res = nosupp + embed_url + orted
         return res
     return ""
+
 
 youtube_embed_url.is_safe = True

@@ -2,6 +2,7 @@ from django.db import models
 
 #! Django: Importing User Model
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 #! Core: UserProfile reciever and post_save signal: Needed to create a UserProfile objects when the User account its created.
 from django.dispatch import receiver
@@ -11,12 +12,14 @@ from django.db.models.signals import post_save
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     header = models.ImageField(
-        upload_to="user/header", default="user/header/default.png", blank=True
+        upload_to="user/header", default="user/header/default.jpg", blank=True
     )
     avatar = models.ImageField(
-        upload_to="user/avatar", default="user/avatar/default.png", blank=True
+        upload_to="user/avatar", default="user/avatar/default.jpg", blank=True
     )
     biography = models.TextField(max_length=280, blank=True)
+    nintendo_switch_code = models.PositiveBigIntegerField(validators=[MinValueValidator(000000000000), MaxValueValidator(999999999999)], blank=True, null=True)
+    is_public = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
 
 
