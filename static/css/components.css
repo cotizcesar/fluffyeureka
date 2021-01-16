@@ -19,3 +19,52 @@
     cursor: default;
     margin: 0 10px;
 }
+/* Component: Statsmenu (Userprofile) EM */
+.usermenu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.usermenu .statsmenu {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.usermenu .settingsmenu {
+    display: grid;
+    align-items: center;
+    justify-self: right;
+    list-style: none;
+    padding: 7px 0 8px 0;
+    margin: 0;
+}
+.usermenu .statsmenu li {
+    text-align: center;
+    border-right: 1px solid #313543;
+    transition: all .4s ease;
+}
+.usermenu .statsmenu li:hover {
+    transition: all .4s ease;
+}
+.usermenu .statsmenu li:last-child {
+    border-right: none;
+}
+.usermenu .statsmenu li a {
+    display: block;
+}
+.usermenu .statsmenu li a:hover {
+    text-decoration: none;
+}
+.usermenu .statsmenu li a .counter {
+    color: #fff;
+    display: block;
+    font-weight: 700;
+    font-size: 1.2em;
+    margin-bottom: 1px;
+}
+.usermenu .statsmenu li a .label {
+    font-size: 0.8em;
+    display: block;
+    color: #9baec8;
+}
