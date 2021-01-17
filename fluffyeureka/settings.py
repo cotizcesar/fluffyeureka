@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.discord",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.twitch",
     # easy-thumbnails: Application Added.
