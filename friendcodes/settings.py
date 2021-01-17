@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.twitch",
     # easy-thumbnails: Application Added.
     # https://easy-thumbnails.readthedocs.io/en/latest/install/#configuring-your-project
     "easy_thumbnails",
@@ -107,15 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
 
@@ -209,10 +204,22 @@ REGISTRATION_OPEN = False  # Change for True in Production
 THUMBNAIL_TRANSPARENCY_EXTENSION = "png"
 THUMBNAIL_ALIASES = {
     "": {
-        "123x123": {"size": (123, 123), "crop": "smart", "upscale": True}, # UserProfile Avatar
-        "920x517": {"size": (920, 517), "crop": "smart", "upscale": True}, # UserProfile Header
-        "524x294": {"size": (524, 294), "crop": "smart", "upscale": True}, # Members Header
-        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True}, # Post Image
+        "123x123": {
+            "size": (123, 123),
+            "crop": "smart",
+            "upscale": True,
+        },  # UserProfile Avatar
+        "920x517": {
+            "size": (920, 517),
+            "crop": "smart",
+            "upscale": True,
+        },  # UserProfile Header
+        "524x294": {
+            "size": (524, 294),
+            "crop": "smart",
+            "upscale": True,
+        },  # Members Header
+        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},  # Post Image
         "120x120": {"size": (120, 120), "crop": "smart", "upscale": True},
         "465x": {"size": (465, 0), "crop": "smart", "upscale": True},
         "36x36": {"size": (36, 36), "crop": "smart", "upscale": True},
@@ -256,5 +263,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 """
 
+SOCIALACCOUNT_PROVIDERS = {
+    "twitch": {"SCOPE": ["user_read"]},
+}
 # Activate Django-Heroku.
 django_heroku.settings(locals())
