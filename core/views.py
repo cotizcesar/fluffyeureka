@@ -27,6 +27,12 @@ from .forms import PostForm
 class Index(TemplateView):
     template_name = "core/index.html"
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(Index, self).get_context_data(**kwargs)
+        context["users_public"] = User.objects.filter(userprofile__is_public=True).order_by("-last_login")[:10]
+        print()
+        print(context)
+        return context
 
 class Feed(LoginRequiredMixin, ListView):
     model = Post
