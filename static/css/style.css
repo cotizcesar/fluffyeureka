@@ -16,3 +16,11 @@ a:hover {
     background: #2e3439;
 }
 
+.btn-google {
+    background: #fff;
+    color: #333;
+}
+.btn-twitch {
+    background: #9146ff;
+    color: #fff;
+}
