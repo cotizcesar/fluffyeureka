@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.twitch",
     # easy-thumbnails: Application Added.
     # https://easy-thumbnails.readthedocs.io/en/latest/install/#configuring-your-project
@@ -265,6 +266,10 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 SOCIALACCOUNT_PROVIDERS = {
     "twitch": {"SCOPE": ["user_read"]},
+    "google": {
+        "SCOPE": ["profile", "email",],
+        "AUTH_PARAMS": {"access_type": "online",},
+    },
 }
 # Activate Django-Heroku.
 django_heroku.settings(locals())
