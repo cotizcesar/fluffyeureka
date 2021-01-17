@@ -22,14 +22,13 @@
 									<ul class="socialaccount_providers">
 										{% include "socialaccount/snippets/provider_list.html" with process="login" %}
 									</ul>
-									<div class="login-or">{% trans 'or' %}</div>
+									<div class="login-or text-center">{% trans 'or' %}</div>
 								</div>
 								{% include "socialaccount/snippets/login_extra.html" %}
 							{% else %}
 								<p class="small">{% blocktrans %}If you have not created an account yet, then please
 								<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 							{% endif %}
-							<hr>
 						</div>
 						<form class="login" method="POST" action="{% url 'account_login' %}">
 							{% csrf_token %}
