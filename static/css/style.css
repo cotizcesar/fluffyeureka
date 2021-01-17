@@ -16,6 +16,10 @@ a:hover {
     background: #2e3439;
 }
 
+.btn-discord {
+    background: #7289DA;
+    color: #fff;
+}
 .btn-google {
     background: #fff;
     color: #333;
