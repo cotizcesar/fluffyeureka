@@ -1,4 +1,4 @@
-"""friendcodes URL Configuration
+"""fluffyeureka URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = (
     [
         path("admin/", admin.site.urls),
-        path("auth/", include("allauth.urls")),
+        path("accounts/", include("allauth.urls")),
         path("", include("core.urls")),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

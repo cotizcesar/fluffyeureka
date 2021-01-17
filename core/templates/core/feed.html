@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="feed">
+        <div class="container my-3">
+            <div class="row">
+                <div class="col-md-4 offset-md-1">
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Post</a>
+                    {% endif %}
+                    Here comes the submenu and maybe internal ads.
+                </div>
+                <div class="col-md-6">
+                    {% if object_list %}
+                        {% for object in object_list %}
+                            {% include 'components/post.html' %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-info" role="alert">
+                            <h4 class="alert-heading">Thanks for signing up!</h4>
+                            <p>Apparently, you don't follow anyone on this network. We recommend you check the <a href="{% url 'members' %}">members section</a> to start following new users.</p>
+                            <hr>
+                            <p class="mb-0">Also if you do not have an avatar, featured image and full name, we recommend that you fill them in on your profile to get more visits.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load thumbnail %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}{% if profile.get_full_name %}{{ profile.get_full_name }}{% else %}{{ profile.username }}{% endif %} (@{{ profile.username }}) - Fluffyeureka{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="userprofile">
+        <div class="container my-3">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <img class="header img-fluid rounded-top"
+                        src="{{ profile.userprofile.header|thumbnail_url:'920x517'|default:'https://via.placeholder.com/920x517' }}"
+                        alt="{% if profile.get_full_name %}{{ profile.get_full_name }} - @{{ profile.username }}{% else %}@{{ profile.username }}{% endif %} header.
+                    ">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-10 offset-md-1">
+                    <div class="bg-dark rounded-bottom p-3">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img class="avatar img-fluid rounded" src="{{ profile.userprofile.avatar|thumbnail_url:'123x123'|default:'https://via.placeholder.com/123x123' }}" alt="{% if profile.get_full_name %}{{ profile.get_full_name }} - @{{ profile.username }}{% else %}@{{ profile.username }}{% endif %} avatar.">
+                            </div>
+                            <div class="col-md-10">
+                                <h1 class="name h2">
+                                    {% if profile.get_full_name %}{{ profile.get_full_name }}{% else %}{{ profile.username }}{% endif %}
+                                    <small class="username text-muted">
+                                        @{{ profile.username }} {% if profile.is_superuser %}<i class="fas fa-check-circle fa-fw fa-xs text-primary"></i>{% endif %}
+                                    </small>
+                                </h1>
+                                {% if profile.userprofile.biography %}
+                                    <p class="biography small mb-1">{{ profile.userprofile.biography }}</p>
+                                {% endif %}
+                                {% if profile.userprofile.game %}
+                                    <p class="game small mb-1">Game: {{ profile.userprofile.game }}</p>
+                                {% endif %}
+                                {% if profile.userprofile.is_public %}
+                                    {% if profile.userprofile.nintendo_switch_code %}
+                                        <span class="badge badge-danger mb-1">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
+                                    {% endif %}
+                                {% else %}
+                                    {% if user.is_authenticated %}
+                                        {% if profile.userprofile.nintendo_switch_code %}
+                                            <span class="badge badge-danger">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                {% if profile.last_login %}
+                                    <p class="lastlogin text-muted small mb-0">Last seen: {{ profile.last_login }}</p>
+                                {% endif %}
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <nav class="usermenu">
+                                            <ul class="statsmenu">
+                                                <li class="{% if request.resolver_match.url_name == 'userprofile' %}active{% endif %}">
+                                                    <a href="#">
+                                                        <span class="counter">{{ posts_count|number_formatter }}</span>
+                                                        <span class="label">Posts</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="counter">{{ following_count|number_formatter }}</span>
+                                                        <span class="label">Following</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="counter">{{ followers_count|number_formatter }}</span>
+                                                        <span class="label">Followers</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <ul class="settingsmenu">
+                                                <li>
+                                                    {% if user.is_authenticated %}
+                                                        {% if user.username == profile.username %}
+                                                            <a class="btn btn-secondary" href="#"><i class="fas fa-user-edit fa-fw mr-1"></i>Edit Profile</a>
+                                                        {% elif connected %}
+                                                            <a class="btn btn-danger" href="{% url 'unfollow' profile.username %}"><i class="fas fa-user-minus fa-fw mr-1"></i> Unfollow</a>
+                                                        {% elif user.username != profile.username %}
+                                                            <a class="btn btn-success" href="{% url 'follow' profile.username %}"><i class="fas fa-user-plus fa-fw mr-1"></i> Follow</a>
+                                                        {% else %}
+                                                            <a class="btn btn-secondary" href="#"><i class="fas fa-envelope fa-fw mr-1"></i>Message</a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-1">
+                    {% if posts %}
+                        {% for object in posts %}
+                            {% include 'components/post.html' %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-info" role="alert">
+                            <i class="fas fa-info-circle fa-fw"></i> This user has no posts to display.
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    {% if user.is_authenticated %}
+                        {% if user.username == profile.username %}
+                            <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Post</a>
+                        {% endif %}
+                    {% endif %}
+                    Block for recomendations and more. Or maybe ads idk. (WIP)
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -29,21 +29,34 @@
                             <div class="col-md-6">
                                 <h5><i class="fas fa-list-ul fa-fw text-info mr-1"></i> Lists By Game</h5>
                                 <hr>
+                                {% if games %}
+                                    {% for object in games %}
+                                        <div class="media">
+                                            <img src="https://via.placeholder.com/48x48" class="mr-3 img-fluid rounded" alt="...">
+                                            <div class="media-body">
+                                                <h6 class="mt-1 mb-0">{{ object.title }}</h6>
+                                                <a href="#" class="small">View gamers</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-info" role="alert">
+                                        <i class="fas fa-info-circle fa-fw"></i> No games have been added to the database.
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="col-md-6">
                                 <h5><i class="fas fa-users fa-fw text-info mr-1"></i> By User</h5>
                                 <hr>
-                                <div class="media user-thumb">
-                                    <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="...">
-                                    <div class="media-body">
-                                        <h6 class="my-0">Cesar Cotiz</h6>
-                                        <p class="mb-0">SW-5842-0377-2410</p>
+                                {% if users_public %}
+                                    {% for object in users_public %}
+                                        {% include 'components/user_thumb_index.html' %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-info" role="alert">
+                                        <i class="fas fa-info-circle fa-fw"></i> No friend codes have been shared.
                                     </div>
-                                    <div class="media-body text-right small mt-1">
-                                        <h6 class="my-0">Favorite game</h6>
-                                        <p class="mb-0">Animal Crossing: New Horizons</p>
-                                    </div>
-                                </div>            
+                                {% endif %}
                             </div>
                         </div>
                     </div>

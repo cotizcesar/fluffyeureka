@@ -1,9 +1,6 @@
-{% extends "socialaccount/base.html" %}
-
+{% extends "base.html" %}
 {% load i18n %}
-
 {% block head_title %}{% trans "Account Connections" %}{% endblock %}
-
 {% block content %}
 <h1>{% trans "Account Connections" %}</h1>
 
@@ -48,7 +45,5 @@
 <ul class="socialaccount_providers">
 {% include "socialaccount/snippets/provider_list.html" with process="connect" %}
 </ul>
-
 {% include "socialaccount/snippets/login_extra.html" %}
-
 {% endblock %}

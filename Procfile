@@ -1,1 +1,1 @@
-web: gunicorn friendcodes.wsgi
+web: gunicorn fluffyeureka.wsgi
