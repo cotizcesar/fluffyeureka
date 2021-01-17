@@ -1,0 +1,24 @@
+{% load thumbnail %}
+{% load custom_filters %}
+<div class="userthumb-home mb-3">
+    <div class="media">
+        <a href="{% url 'userprofile' object.username %}">
+            <img src="{{ object.userprofile.avatar|thumbnail_url:'48x48'|default:'https://via.placeholder.com/48' }}" class="rounded mr-3" alt="{% if object.get_full_name %}{{ object.get_full_name }} - @{{ object.username }}{% else %}@{{ object.username }} avatar.{% endif %}">
+        </a>
+        <div class="media-body">
+            <h6 class="name mb-1">
+                <a href="{% url 'userprofile' object.username %}">
+                    {% if object.get_full_name %}{{ object.get_full_name }}{% else %}{{ object.username }}{% endif %}
+                    <small class="username text-muted">
+                        @{{ object.username }} {% if object.is_superuser %}<i class="fas fa-check-circle fa-fw fa-xs text-primary"></i>{% endif %}
+                    </small>
+                </a>
+            </h6>
+            <span class="badge badge-danger">{{ object.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
+        </div>
+        <div class="media-body text-right small mt-2">
+            <h6 class="my-0">Game</h6>
+            <p class="mb-0">Animal Crossing: New Horizons</p>
+        </div>
+    </div>
+</div>

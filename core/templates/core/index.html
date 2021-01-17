@@ -29,34 +29,25 @@
                             <div class="col-md-6">
                                 <h5><i class="fas fa-list-ul fa-fw text-info mr-1"></i> Lists By Game</h5>
                                 <hr>
+                                {% if games %}
+                                    Bla bla
+                                {% else %}
+                                    <div class="alert alert-info" role="alert">
+                                        <i class="fas fa-info-circle fa-fw"></i> No games have been added to the database.
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="col-md-6">
                                 <h5><i class="fas fa-users fa-fw text-info mr-1"></i> By User</h5>
                                 <hr>
                                 {% if users_public %}
                                     {% for object in users_public %}
-                                        <div class="userthumb-home p-2">
-                                            <div class="media">
-                                                <a href="{% url 'userprofile' object.username %}">
-                                                    <img src="{{ object.userprofile.avatar|thumbnail_url:'48x48'|default:'https://via.placeholder.com/48' }}" class="rounded mr-3" alt="{% if object.get_full_name %}{{ object.get_full_name }} - @{{ object.username }}{% else %}@{{ object.username }} avatar.{% endif %}">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h6 class="mt-0 mb-1">
-                                                        {% if object.get_full_name %}{{ object.get_full_name }}{% else %}{{ object.username }}{% endif %}
-                                                        <small class="username text-muted">
-                                                            @{{ object.username }} {% if object.is_superuser %}<i class="fas fa-check-circle fa-fw fa-xs text-primary"></i>{% endif %}
-                                                        </small>
-                                                    </h6>
-                                                    <span class="badge badge-danger mb-1">{{ object.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
-                                                </div>
-                                                <div class="media-body text-right small mt-1">
-                                                    <h6 class="my-0">Game</h6>
-                                                    <p class="mb-0">Animal Crossing: New Horizons</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {% include 'components/user_thumb_index.html' %}
                                     {% endfor %}
                                 {% else %}
+                                    <div class="alert alert-info" role="alert">
+                                        <i class="fas fa-info-circle fa-fw"></i> No friend codes have been shared.
+                                    </div>
                                 {% endif %}
                             </div>
                         </div>
