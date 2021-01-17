@@ -185,7 +185,7 @@ BOOTSTRAP4 = {
 
 # Django: Redirect on Login
 # https://docs.djangoproject.com/en/3.1/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = "feed"
 
 # django-allauth: General Configuration
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
