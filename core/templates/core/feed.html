@@ -19,7 +19,12 @@
                             {% include 'components/post.html' %}
                         {% endfor %}
                     {% else %}
-
+                        <div class="alert alert-info" role="alert">
+                            <h4 class="alert-heading">Thanks for signing up!</h4>
+                            <p>Apparently, you don't follow anyone on this network. We recommend you check the <a href="{% url 'members' %}">members section</a> to start following new users.</p>
+                            <hr>
+                            <p class="mb-0">Also if you do not have an avatar, featured image and full name, we recommend that you fill them in on your profile to get more visits.</p>
+                        </div>
                     {% endif %}
                 </div>
             </div>

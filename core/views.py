@@ -29,10 +29,11 @@ class Index(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
-        context["users_public"] = User.objects.filter(userprofile__is_public=True).order_by("-last_login")[:10]
-        print()
-        print(context)
+        context["users_public"] = User.objects.filter(
+            userprofile__is_public=True
+        ).order_by("-last_login")[:10]
         return context
+
 
 class Feed(LoginRequiredMixin, ListView):
     model = Post
@@ -41,10 +42,10 @@ class Feed(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(Feed, self).get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(
+        context["object_list"] = Post.objects.filter(
             Q(user__in=self.request.user.follower.values("following"))
             | Q(user=self.request.user)
-        )
+        ).order_by("-date_created")
         return context
 
 

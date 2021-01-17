@@ -8,6 +8,20 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
+#! django-autoslug: Added custom Field.
+# https://django-autoslug.readthedocs.io/en/latest/#examples
+from autoslug import AutoSlugField
+
+
+class Game(models.Model):
+    title = models.CharField(max_length=140)
+    slug = AutoSlugField(populate_from="title", unique=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -18,7 +32,12 @@ class UserProfile(models.Model):
         upload_to="user/avatar", default="user/avatar/default.png", blank=True
     )
     biography = models.TextField(max_length=160, blank=True)
-    nintendo_switch_code = models.PositiveBigIntegerField(validators=[MinValueValidator(000000000000), MaxValueValidator(999999999999)], blank=True, null=True)
+    nintendo_switch_code = models.PositiveBigIntegerField(
+        validators=[MinValueValidator(000000000000), MaxValueValidator(999999999999)],
+        blank=True,
+        null=True,
+    )
+    game = models.OneToOneField(Game, on_delete=models.PROTECT, blank=True, null=True)
     is_public = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
 
@@ -63,4 +82,4 @@ class Post(models.Model):
     )
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    featured = models.BooleanField(default=False)
+    is_pinned = models.BooleanField(default=False)

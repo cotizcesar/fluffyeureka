@@ -35,6 +35,9 @@
                                 {% if profile.userprofile.biography %}
                                     <p class="biography small mb-1">{{ profile.userprofile.biography }}</p>
                                 {% endif %}
+                                {% if profile.userprofile.game %}
+                                    <p class="game small mb-1">Game: {{ profile.userprofile.game }}</p>
+                                {% endif %}
                                 {% if profile.userprofile.is_public %}
                                     {% if profile.userprofile.nintendo_switch_code %}
                                         <span class="badge badge-danger mb-1">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
@@ -46,7 +49,9 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}
-                                <p class="lastlogin text-muted small mb-0">Last seen: {{ profile.last_login }}</p>
+                                {% if profile.last_login %}
+                                    <p class="lastlogin text-muted small mb-0">Last seen: {{ profile.last_login }}</p>
+                                {% endif %}
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <nav class="usermenu">
@@ -107,7 +112,9 @@
                 </div>
                 <div class="col-md-4">
                     {% if user.is_authenticated %}
-                        <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Post</a>
+                        {% if user.username == profile.username %}
+                            <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Post</a>
+                        {% endif %}
                     {% endif %}
                     Block for recomendations and more. Or maybe ads idk. (WIP)
                 </div>
