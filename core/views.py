@@ -18,7 +18,7 @@ from django.contrib import messages
 from django.db.models import Count
 
 #! Django: Importing User Model
-from .models import User, UserProfile, Connection, Post
+from .models import User, UserProfile, Connection, Post, Game
 
 #! Core: Importing forms
 from .forms import PostForm
@@ -32,6 +32,9 @@ class Index(TemplateView):
         context["users_public"] = User.objects.filter(
             userprofile__is_public=True
         ).order_by("-last_login")[:10]
+        context["games"] = Game.objects.filter(
+            userprofile__is_public=True
+        ).order_by("title")[:10]
         return context
 
 

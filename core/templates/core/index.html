@@ -30,7 +30,15 @@
                                 <h5><i class="fas fa-list-ul fa-fw text-info mr-1"></i> Lists By Game</h5>
                                 <hr>
                                 {% if games %}
-                                    Bla bla
+                                    {% for object in games %}
+                                        <div class="media">
+                                            <img src="https://via.placeholder.com/48x48" class="mr-3 img-fluid rounded" alt="...">
+                                            <div class="media-body">
+                                                <h6 class="mt-1 mb-0">{{ object.title }}</h6>
+                                                <a href="#" class="small">View list</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
                                 {% else %}
                                     <div class="alert alert-info" role="alert">
                                         <i class="fas fa-info-circle fa-fw"></i> No games have been added to the database.
