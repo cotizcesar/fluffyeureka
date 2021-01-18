@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.discord",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.twitch",
+    "allauth.socialaccount.providers.twitter",
     # easy-thumbnails: Application Added.
     # https://easy-thumbnails.readthedocs.io/en/latest/install/#configuring-your-project
     "easy_thumbnails",
