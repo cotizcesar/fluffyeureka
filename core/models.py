@@ -38,7 +38,7 @@ class UserProfile(models.Model):
         null=True,
     )
     game = models.OneToOneField(Game, on_delete=models.PROTECT, blank=True, null=True)
-    is_public = models.BooleanField(default=False)
+    is_public = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)
 
 
