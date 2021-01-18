@@ -267,11 +267,12 @@ AWS_S3_OBJECT_PARAMETERS = {
 """
 
 SOCIALACCOUNT_PROVIDERS = {
-    "twitch": {"SCOPE": ["user_read"]},
+    "discord": {"SCOPE": ["identify", "email", "guilds"]},
     "google": {
         "SCOPE": ["profile", "email",],
         "AUTH_PARAMS": {"access_type": "online",},
     },
+    "twitch": {"SCOPE": ["user_read"]},
 }
 # Activate Django-Heroku.
 django_heroku.settings(locals())

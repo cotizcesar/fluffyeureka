@@ -83,3 +83,14 @@ class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     is_pinned = models.BooleanField(default=False)
+
+
+class Dodo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField(max_length=280)
+    code = models.CharField(max_length=5)
+    image = models.ImageField(upload_to="user/dodo", blank=True)
+    video = models.URLField(blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+    is_pinned = models.BooleanField(default=False)

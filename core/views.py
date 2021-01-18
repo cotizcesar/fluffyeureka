@@ -21,7 +21,7 @@ from django.db.models import Count
 from .models import User, UserProfile, Connection, Post, Game
 
 #! Core: Importing forms
-from .forms import PostForm
+from .forms import UserForm, UserProfileForm, PostForm
 
 
 class Index(TemplateView):
@@ -32,9 +32,9 @@ class Index(TemplateView):
         context["users_public"] = User.objects.filter(
             userprofile__is_public=True
         ).order_by("-last_login")[:10]
-        context["games"] = Game.objects.filter(
-            userprofile__is_public=True
-        ).order_by("title")[:10]
+        context["games"] = Game.objects.filter(userprofile__is_public=True).order_by(
+            "title"
+        )[:10]
         return context
 
 
@@ -89,6 +89,30 @@ class UserProfileDetailView(DetailView):
             ).filter(following__username=username)
             context["connected"] = True if result else False
         return context
+
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserForm
+    template_name = "core/userprofile_update.html"
+    success_url = reverse_lazy("feed")
+
+    def get_object(self):
+        return self.request.user
+
+
+class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = UserProfile
+    form_class = UserProfileForm
+    template_name = "core/userprofile_update.html"
+    success_url = reverse_lazy("feed")
+
+    def form_valid(self, form):
+        form.save(self.request.user)
+        return super(UserProfileUpdateView, self).form_valid(form)
+
+    def get_object(self):
+        return self.request.user.userprofile
 
 
 # Follow: hand-made system, its a better and modified copy
@@ -158,6 +182,18 @@ def unfollow_view(request, *args, **kwargs):
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    form_class = PostForm
+    template_name = "core/post_create.html"
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        obj.date_created = timezone.now()
+        obj.save()
+        return redirect("feed")
+
+
+class DodoCreateView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     template_name = "core/post_create.html"
 

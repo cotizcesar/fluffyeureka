@@ -7,6 +7,8 @@ from .views import (
     Feed,
     Members,
     UserProfileDetailView,
+    UserUpdateView,
+    UserProfileUpdateView,
     follow_view,
     unfollow_view,
     PostCreateView,
@@ -26,6 +28,12 @@ urlpatterns = [
         r"^user/(?P<username>[a-zA-Z-_\d+\.]+)/unfollow/$",
         unfollow_view,
         name="unfollow",
+    ),
+    url(r"^accounts/basic/$", UserUpdateView.as_view(), name="userprofile_basic"),
+    url(
+        r"^accounts/advanced/$",
+        UserProfileUpdateView.as_view(),
+        name="userprofile_advanced",
     ),
     path("post/create/", PostCreateView.as_view(), name="post_create"),
 ]
