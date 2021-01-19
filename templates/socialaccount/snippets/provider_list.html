@@ -16,7 +16,7 @@
 	{% endif %}
 	<a 
 		title="{{provider.name}}"
-		class="btn btn-{{provider.id}} btn-block socialaccount_provider {{provider.id}} my-2"
+		class="btn btn-{{provider.id}} btn-sm btn-block socialaccount_provider {{provider.id}} my-2"
 		href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"
 		role="button"
 	>

@@ -3,7 +3,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 # Core: Importing Models
-from .models import UserProfile, Connection, Post, Game
+from .models import UserProfile, Connection, Post, Dodo, Game
 
 
 class UserProfileResource(resources.ModelResource):
@@ -47,6 +47,21 @@ class PostAdmin(ImportExportModelAdmin):
     )
     pass
 
+class DodoResource(resources.ModelResource):
+    class Meta:
+        model = Dodo
+
+
+@admin.register(Dodo)
+class DodoAdmin(ImportExportModelAdmin):
+    list_display = (
+        "id",
+        "user",
+        "code",
+        "date_created",
+        "date_updated",
+    )
+    pass
 
 class GameResource(resources.ModelResource):
     class Meta:

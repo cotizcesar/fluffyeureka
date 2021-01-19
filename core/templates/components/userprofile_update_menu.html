@@ -1,0 +1,24 @@
+{% load i18n %}
+<div class="bg-dark p-3 rounded">
+    <ul class="nav flex-column mb-3">
+        <h2 class="h5"><i class="fas fa-user fa-fw mr-1"></i> {% trans "Profile" %}</h2>
+        <li class="nav-item">
+            <a class="nav-link{% if request.resolver_match.url_name == 'userprofile_basic' %} text-light{% endif %}" href="{% url 'userprofile_basic' %}"><i class="fas fa-signature fa-fw mr-1"></i> {% trans "Name" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if request.resolver_match.url_name == 'userprofile_advanced' %} text-light{% endif %}" href="{% url 'userprofile_advanced' %}"><i class="fas fa-address-card fa-fw mr-1"></i> {% trans "Avatar & Header" %}</a>
+        </li>
+    </ul>
+    <ul class="nav flex-column">
+        <h2 class="h5"><i class="fas fa-user-circle fa-fw mr-1"></i> {% trans "Account" %}</h2>
+        <li class="nav-item">
+            <a class="nav-link{% if request.resolver_match.url_name == 'account_email' %} text-light{% endif %}" href="{% url 'account_email' %}"><i class="fas fa-envelope fa-fw mr-1"></i> {% trans "Email" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if request.resolver_match.url_name == 'account_change_password' %} text-light{% endif %}" href="{% url 'account_change_password' %}"><i class="fas fa-key fa-fw mr-1"></i> {% trans "Password" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if request.resolver_match.url_name == 'socialaccount_connections' %} text-light{% endif %}" href="{% url 'socialaccount_connections' %}"><i class="fas fa-people-arrows fa-fw mr-1"></i> {% trans "Social Accounts" %}</a>
+        </li>
+    </ul>
+</div>

@@ -7,13 +7,13 @@
     <div id="feed">
         <div class="container my-3">
             <div class="row">
-                <div class="col-md-4 offset-md-1">
-                    {% if user.is_authenticated %}
-                        <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Post</a>
-                    {% endif %}
-                    Here comes the submenu and maybe internal ads.
+                <div class="col-md-10 offset-md-1">
+                    <h1 class="h4"><i class="fas fa-list-ul fa-fw text-info"></i> Feed</h1>
+                    <hr>
                 </div>
-                <div class="col-md-6">
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-1">
                     {% if object_list %}
                         {% for object in object_list %}
                             {% include 'components/post.html' %}
@@ -25,6 +25,18 @@
                             <hr>
                             <p class="mb-0">Also if you do not have an avatar, featured image and full name, we recommend that you fill them in on your profile to get more visits.</p>
                         </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> Post</a>
+                        {% if user.userprofile.game.slug == 'animal-crossing-new-horizons' %}
+                        <div class="bg-dark p-3 rounded my-3">
+                            <h2 class="h5">{{ user.userprofile.game.title}}</h2>
+                            <hr>
+                            <a class="btn btn-success" href="{% url 'dodo_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> Dodo code</a>
+                        </div>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>

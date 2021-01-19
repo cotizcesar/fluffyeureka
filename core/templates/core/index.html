@@ -23,11 +23,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="bg-dark text-light rounded p-3">
-                        <h3><i class="fas fa-th-large fa-fw text-info mr-1"></i> Latest codes</h3>
-                        <p>These are the last friend codes published with the option to view them publicly.</p>
+                        <h3><i class="fas fa-th-large fa-fw text-info mr-1"></i> Dashboard</h3>
+                        <p>These are the last games, friend codes, registered users and dodo codes published.</p>
                         <div class="row mt-5">
                             <div class="col-md-6">
-                                <h5><i class="fas fa-list-ul fa-fw text-info mr-1"></i> Lists By Game</h5>
+                                <h5><i class="fas fa-list-ul fa-fw text-info mr-1"></i> Games</h5>
                                 <hr>
                                 {% if games %}
                                     {% for object in games %}
@@ -46,7 +46,7 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-6">
-                                <h5><i class="fas fa-users fa-fw text-info mr-1"></i> By User</h5>
+                                <h5><i class="fas fa-users fa-fw text-info mr-1"></i> Friend Codes</h5>
                                 <hr>
                                 {% if users_public %}
                                     {% for object in users_public %}
@@ -55,6 +55,34 @@
                                 {% else %}
                                     <div class="alert alert-info" role="alert">
                                         <i class="fas fa-info-circle fa-fw"></i> No friend codes have been shared.
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-md-6">
+                                <h5><i class="fas fa-list-ul fa-fw text-info mr-1"></i> Latest Users</h5>
+                                <hr>
+                                {% if users_latest %}
+                                    {% for object in users_latest %}
+                                        {% include 'components/user_thumb_index.html' %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-info" role="alert">
+                                        <i class="fas fa-info-circle fa-fw"></i> No games have been added to the database.
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <h5><i class="fas fa-code fa-fw text-info mr-1"></i> Dodo Codes (Animal Crossing)</h5>
+                                <hr>
+                                {% if dodo_codes %}
+                                    {% for object in dodo_codes %}
+                                        {% include 'components/user_thumb_index_dodo.html' %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-info" role="alert">
+                                        <i class="fas fa-info-circle fa-fw"></i> No dodo codes have been shared.
                                     </div>
                                 {% endif %}
                             </div>
