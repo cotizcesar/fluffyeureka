@@ -217,8 +217,8 @@ THUMBNAIL_ALIASES = {
             "crop": "smart",
             "upscale": True,
         },  # UserProfile Header
-        "524x294": {
-            "size": (524, 294),
+        "540x303": {
+            "size": (540, 303),
             "crop": "smart",
             "upscale": True,
         },  # Members Header

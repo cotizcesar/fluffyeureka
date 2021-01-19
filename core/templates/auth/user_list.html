@@ -10,19 +10,17 @@
 		<div class="container my-3">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="bg-dark text-light rounded p-3">
-						<h3><i class="fas fa-users fa-fw text-info mr-1"></i> Latest members</h3>
-						<p>These are the last members registered on the website. You can only see those that have a public profile.</p>
-						<hr>
-						<div class="row">
-							{% if object_list %}
-								{% for object in object_list %}
-									<div class="col-md-6">
-										{% include 'components/user_thumb.html' %}
-									</div>
-								{% endfor %}
-							{% endif %}
-						</div>						
+					<h1 class="h4"><i class="fas fa-users fa-fw text-info mr-1"></i> Latest members</h1>
+					<p>These are the last members registered on the website. You can only see those that have a public profile.</p>
+					<hr>
+					<div class="row">
+						{% if object_list %}
+							{% for object in object_list %}
+								<div class="col-md-6">
+									{% include 'components/user_thumb.html' %}
+								</div>
+							{% endfor %}
+						{% endif %}
 					</div>
 					{% if is_paginated %}
 					{% load proper_paginate %}

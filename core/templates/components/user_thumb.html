@@ -1,7 +1,7 @@
 {% load thumbnail %}
 <div class="userthumb">
     <a href="{% url 'userprofile' object.username %}">
-        <img class="header img-fluid rounded-top" src="{{ object.userprofile.header|thumbnail_url:'524x294'|default:'https://via.placeholder.com/524x294' }}" alt="{% if object.get_full_name %}{{ object.get_full_name }} - @{{ object.username }}{% else %}@{{ object.username }} header.{% endif %}">
+        <img class="header img-fluid rounded-top" src="{{ object.userprofile.header|thumbnail_url:'540x303'|default:'https://via.placeholder.com/540x303' }}" alt="{% if object.get_full_name %}{{ object.get_full_name }} - @{{ object.username }}{% else %}@{{ object.username }} header.{% endif %}">
     </a>
     <div class="media mb-3 bg-darker p-3 rounded-bottom">
         <a href="{% url 'userprofile' object.username %}">

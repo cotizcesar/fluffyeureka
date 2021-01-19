@@ -113,10 +113,16 @@
                 <div class="col-md-4">
                     {% if user.is_authenticated %}
                         {% if user.username == profile.username %}
-                            <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Post</a>
+                            <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> Post</a>
+                            {% if profile.userprofile.game.slug == 'animal-crossing-new-horizons' %}
+                                <div class="bg-dark p-3 rounded my-3">
+                                    <h2 class="h5">{{ profile.userprofile.game.title}}</h2>
+                                    <hr>
+                                    <a class="btn btn-success" href="{% url 'dodo_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> Dodo code</a>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
-                    Block for recomendations and more. Or maybe ads idk. (WIP)
                 </div>
             </div>
         </div>
