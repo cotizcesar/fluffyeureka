@@ -18,10 +18,10 @@ from django.contrib import messages
 from django.db.models import Count
 
 #! Django: Importing User Model
-from .models import User, UserProfile, Connection, Post, Game
+from .models import User, UserProfile, Connection, Post, Game, Dodo
 
 #! Core: Importing forms
-from .forms import UserForm, UserProfileForm, PostForm
+from .forms import UserForm, UserProfileForm, PostForm, DodoForm
 
 
 class Index(TemplateView):
@@ -29,12 +29,15 @@ class Index(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
+        context["users_latest"] = User.objects.filter().order_by("date_joined")[:20]
         context["users_public"] = User.objects.filter(
             userprofile__is_public=True
-        ).order_by("-last_login")[:10]
+        ).order_by("-last_login")[:20]
         context["games"] = Game.objects.filter(userprofile__is_public=True).order_by(
             "title"
-        )[:10]
+        )[:20]
+        context['dodo_codes'] = Dodo.objects.filter()[:20]
+        print(context.get('dodo_codes'))
         return context
 
 
@@ -194,8 +197,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 class DodoCreateView(LoginRequiredMixin, CreateView):
-    form_class = PostForm
-    template_name = "core/post_create.html"
+    form_class = DodoForm
+    template_name = "core/dodo_create.html"
 
     def form_valid(self, form):
         obj = form.save(commit=False)

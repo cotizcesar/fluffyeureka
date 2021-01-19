@@ -12,6 +12,7 @@ from .views import (
     follow_view,
     unfollow_view,
     PostCreateView,
+    DodoCreateView,
 )
 
 urlpatterns = [
@@ -36,4 +37,5 @@ urlpatterns = [
         name="userprofile_advanced",
     ),
     path("post/create/", PostCreateView.as_view(), name="post_create"),
+    path("dodo/create/", DodoCreateView.as_view(), name="dodo_create"),
 ]

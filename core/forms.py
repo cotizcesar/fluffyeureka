@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 #! Core: Models
-from .models import UserProfile, Post
+from .models import UserProfile, Post, Dodo
 
 from allauth.account.forms import SignupForm
 
@@ -34,9 +34,14 @@ class UserProfileForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("text", "image", "video")
+        fields = ("text", "image")
         help_texts = {
             "text": "Use this space for text, you have a limit of 280 characters.",
             "image": "Only images in JPG and PNG are allowed.",
             "video": "Copy and paste an URL from the following sites: YouTube.com, Twitch.tv, Vimeo.com or Giphy.com.",
         }
+
+class DodoForm(forms.ModelForm):
+    class Meta:
+        model = Dodo
+        fields = ("text", "code", "image", )
