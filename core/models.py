@@ -43,7 +43,7 @@ class UserProfile(models.Model):
         blank=True,
         null=True,
     )
-    favorite_game = models.OneToOneField(Game, on_delete=models.PROTECT, blank=True, null=True)
+    favorite_game = models.ForeignKey(Game, on_delete=models.PROTECT, blank=True, null=True)
     is_public = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)
 
