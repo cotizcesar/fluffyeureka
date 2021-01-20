@@ -187,42 +187,27 @@ LOGIN_REDIRECT_URL = "feed"
 
 # django-allauth: General Configuration
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-ACCOUNT_EMAIL_REQUIRED = True  # Change for True in Production
-ACCOUNT_EMAIL_VERIFICATION = "optional"  # Change for mandatory in Production
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"  # Change for https in Production
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
-ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
-ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = "index"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
-ACCOUNT_USERNAME_BLACKLIST = ["admin", "ordis", "cotizcesar", "Warframe"]
+ACCOUNT_USERNAME_BLACKLIST = ["admin", "cotizcesar"]
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_MIN_LENGTH = 6
-REGISTRATION_OPEN = False  # Change for True in Production
+ACCOUNT_USERNAME_VALIDATORS = 'validators.username_validator'
+REGISTRATION_OPEN = True
 
 THUMBNAIL_TRANSPARENCY_EXTENSION = "png"
 THUMBNAIL_ALIASES = {
     "": {
-        "123x123": {
-            "size": (123, 123),
-            "crop": "smart",
-            "upscale": True,
-        },  # UserProfile Avatar
-        "920x517": {
-            "size": (920, 517),
-            "crop": "smart",
-            "upscale": True,
-        },  # UserProfile Header
-        "540x303": {
-            "size": (540, 303),
-            "crop": "smart",
-            "upscale": True,
-        },  # Members Header
-        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},  # Post Image
+        "123x123": {"size": (123, 123), "crop": "smart", "upscale": True,},
+        "920x517": {"size": (920, 517), "crop": "smart", "upscale": True,},
+        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True,},
+        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},
         "120x120": {"size": (120, 120), "crop": "smart", "upscale": True},
         "465x": {"size": (465, 0), "crop": "smart", "upscale": True},
         "36x36": {"size": (36, 36), "crop": "smart", "upscale": True},
