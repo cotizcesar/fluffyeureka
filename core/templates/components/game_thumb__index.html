@@ -1,0 +1,4 @@
+{% load thumbnail %}
+<a class="d-block" href="#">
+    <img src="{{ object.avatar|thumbnail_url:'277x155'|default:'https://via.placeholder.com/277x155' }}" class="img-fluid rounded" alt="...">
+</a>

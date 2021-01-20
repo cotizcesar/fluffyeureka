@@ -209,6 +209,7 @@ THUMBNAIL_ALIASES = {
         "358x98": {"size": (350, 98), "crop": "smart", "upscale": True}, # Members
         "540x303": {"size": (540, 303), "crop": "smart", "upscale": True}, # Post image
         "48x48": {"size": (48, 48), "crop": "smart", "upscale": True}, # User profile avatar (thumb)
+        "277x155": {"size": (277, 155), "crop": "smart", "upscale": True}, # Index Game avatar (thumb)
         "120x120": {"size": (120, 120), "crop": "smart", "upscale": True},
         "465x": {"size": (465, 0), "crop": "smart", "upscale": True},
         "36x36": {"size": (36, 36), "crop": "smart", "upscale": True},
