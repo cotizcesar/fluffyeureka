@@ -31,10 +31,11 @@ class UserProfileForm(forms.ModelForm):
 class UserProfileGameForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ("favorite_game", "is_public")
+        fields = ("nintendo_switch_code", "favorite_game", "is_public")
         help_texts = {
             "favorite_game": "Select the game you like.",
             "is_public": "If you don't want to share your friend code publicly to unregistered users, uncheck this checkbox.",
+            "nintendo_switch_code": "Add your friend code from your Nintendo Switch so that members can add you.",
         }
 
 
