@@ -16,6 +16,12 @@ from autoslug import AutoSlugField
 class Game(models.Model):
     title = models.CharField(max_length=140)
     slug = AutoSlugField(populate_from="title", unique=True, blank=True)
+    header = models.ImageField(
+        upload_to="games/header", default="games/header/default.png", blank=True
+    )
+    avatar = models.ImageField(
+        upload_to="games/avatar", default="games/avatar/default.png", blank=True
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
