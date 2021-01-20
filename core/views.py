@@ -21,7 +21,7 @@ from django.db.models import Count
 from .models import User, UserProfile, Connection, Post, Game, Dodo
 
 #! Core: Importing forms
-from .forms import UserForm, UserProfileForm, PostForm, DodoForm
+from .forms import UserForm, UserProfileForm, UserProfileGameForm, PostForm, DodoForm
 
 
 class Index(TemplateView):
@@ -29,15 +29,10 @@ class Index(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
-        context["users_latest"] = User.objects.filter().order_by("date_joined")[:20]
-        context["users_public"] = User.objects.filter(
-            userprofile__is_public=True
-        ).order_by("-last_login")[:20]
-        context["games"] = Game.objects.filter(userprofile__is_public=True).order_by(
-            "title"
-        )[:20]
-        context["dodo_codes"] = Dodo.objects.filter()[:20]
-        print(context.get("dodo_codes"))
+        context["games"] = Game.objects.all().order_by("title")[:10]
+        context["users_date_joined"] = User.objects.all().order_by("-date_joined")[:10]
+        context["users_last_login"] = User.objects.exclude(Q(userprofile__favorite_game__isnull=True) | Q(userprofile__nintendo_switch_code__isnull=True) | Q(userprofile__is_public=False)).order_by("-last_login")[:10]
+        context["dodos"] = Dodo.objects.all()[:10]
         return context
 
 
@@ -113,6 +108,19 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.save(self.request.user)
         return super(UserProfileUpdateView, self).form_valid(form)
+
+    def get_object(self):
+        return self.request.user.userprofile
+
+class UserProfileGameUpdateView(LoginRequiredMixin, UpdateView):
+    model = UserProfile
+    form_class = UserProfileGameForm
+    template_name = "core/userprofile_update.html"
+    success_url = reverse_lazy("feed")
+
+    def form_valid(self, form):
+        form.save(self.request.user)
+        return super(UserProfileGameUpdateView, self).form_valid(form)
 
     def get_object(self):
         return self.request.user.userprofile

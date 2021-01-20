@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <img class="header img-fluid rounded-top"
-                        src="{{ profile.userprofile.header|thumbnail_url:'920x517'|default:'https://via.placeholder.com/920x517' }}"
+                        src="{{ profile.userprofile.header|thumbnail_url:'920x258'|default:'https://via.placeholder.com/920x258' }}"
                         alt="{% if profile.get_full_name %}{{ profile.get_full_name }} - @{{ profile.username }}{% else %}@{{ profile.username }}{% endif %} header.
                     ">
                 </div>
@@ -33,24 +33,7 @@
                                     </small>
                                 </h1>
                                 {% if profile.userprofile.biography %}
-                                    <p class="biography small mb-1">{{ profile.userprofile.biography }}</p>
-                                {% endif %}
-                                {% if profile.userprofile.game %}
-                                    <p class="game small mb-1">Game: {{ profile.userprofile.game }}</p>
-                                {% endif %}
-                                {% if profile.userprofile.is_public %}
-                                    {% if profile.userprofile.nintendo_switch_code %}
-                                        <span class="badge badge-danger mb-1">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
-                                    {% endif %}
-                                {% else %}
-                                    {% if user.is_authenticated %}
-                                        {% if profile.userprofile.nintendo_switch_code %}
-                                            <span class="badge badge-danger">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}
-                                {% if profile.last_login %}
-                                    <p class="lastlogin text-muted small mb-0">Last seen: {{ profile.last_login }}</p>
+                                    <p class="biography mb-1">{{ profile.userprofile.biography }}</p>
                                 {% endif %}
                                 <div class="row mt-3">
                                     <div class="col-md-12">
@@ -114,13 +97,19 @@
                     {% if user.is_authenticated %}
                         {% if user.username == profile.username %}
                             <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> Post</a>
-                            {% if profile.userprofile.game.slug == 'animal-crossing-new-horizons' %}
-                                <div class="bg-dark p-3 rounded my-3">
-                                    <h2 class="h5">{{ profile.userprofile.game.title}}</h2>
-                                    <hr>
-                                    <a class="btn btn-success" href="{% url 'dodo_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> Dodo code</a>
-                                </div>
+                            {% if profile.userprofile.favorite_game %}
+                                {% if profile.userprofile.favorite_game.slug == 'animal-crossing-new-horizons' %}
+                                    <div class="bg-dark rounded my-3">
+                                        <h2 class="h6 pt-3 px-3"><i class="fas fa-gamepad fa-fw text-info mr-1"></i> {{ profile.userprofile.favorite_game.title }}</h2>
+                                        <hr>
+                                        <div class="pb-3 px-3">
+                                            <p class="small">Since you selected <strong>{{ profile.userprofile.favorite_game.title }}</strong> as your favorite game, new options for sharing dodo codes have been activated.</p>
+                                            <a class="btn btn-success btn-block" href="{% url 'dodo_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Dodo code</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endif %}
+                            {% include 'components/user_detail_information.html' %}
                         {% endif %}
                     {% endif %}
                 </div>

@@ -32,3 +32,6 @@ a:hover {
     background: #1da1f2;
     color: #fff;
 }
+.list-style-none {
+    list-style: none;
+}

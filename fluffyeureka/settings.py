@@ -204,15 +204,15 @@ REGISTRATION_OPEN = True
 THUMBNAIL_TRANSPARENCY_EXTENSION = "png"
 THUMBNAIL_ALIASES = {
     "": {
-        "123x123": {"size": (123, 123), "crop": "smart", "upscale": True,},
-        "920x517": {"size": (920, 517), "crop": "smart", "upscale": True,},
-        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True,},
-        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},
+        "123x123": {"size": (123, 123), "crop": "smart", "upscale": True}, # User profile avatar
+        "920x258": {"size": (920, 258), "crop": "smart", "upscale": True}, # User profile header
+        "358x98": {"size": (350, 98), "crop": "smart", "upscale": True}, # Members
+        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True}, # Post image
+        "48x48": {"size": (48, 48), "crop": "smart", "upscale": True}, # User profile avatar (thumb)
         "120x120": {"size": (120, 120), "crop": "smart", "upscale": True},
         "465x": {"size": (465, 0), "crop": "smart", "upscale": True},
         "36x36": {"size": (36, 36), "crop": "smart", "upscale": True},
         "475x125": {"size": (475, 125), "crop": "smart", "upscale": True},
-        "48x48": {"size": (48, 48), "crop": "smart", "upscale": True},
         "283x": {"size": (283, 0), "crop": "smart", "upscale": True},
         "298x167": {"size": (298, 167), "crop": "smart", "upscale": True},
         "559x": {"size": (559, 0), "crop": "smart", "upscale": True},

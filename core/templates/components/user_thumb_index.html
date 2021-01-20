@@ -16,10 +16,10 @@
             </h6>
             <span class="badge badge-danger">{{ object.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
         </div>
-        {% if object.userprofile.game %}
+        {% if object.userprofile.favorite_game %}
             <div class="media-body text-right small mt-2">
                 <h6 class="my-0">Game</h6>
-                <p class="mb-0">{{ object.userprofile.game }}</p>
+                <p class="mb-0">{{ object.userprofile.favorite_game }}</p>
             </div>
         {% endif %}
     </div>

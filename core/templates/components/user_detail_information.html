@@ -1,0 +1,31 @@
+{% load custom_filters %}
+<div class="bg-dark rounded my-3">
+    <h2 class="h6 pt-3 px-3"><i class="fas fa-info-circle fa-fw text-info mr-1"></i> Information</h2>
+    <hr>
+    <div class="pb-3 px-3">
+        <ul class="list-style-none p-0 m-0">
+            <li>
+                {% if profile.userprofile.is_public %}
+                    {% if profile.userprofile.nintendo_switch_code %}
+                        Nintendo Switch: <span class="badge badge-danger mb-1">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
+                    {% endif %}
+                {% else %}
+                    {% if user.is_authenticated %}
+                        {% if profile.userprofile.nintendo_switch_code %}
+                            Nintendo Switch: <span class="badge badge-danger">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </li>
+            <li>
+                Game: <span class="font-weight-bold">{{ profile.userprofile.favorite_game }}</span>
+            </li>
+            <li>
+                Joined: <span class="font-weight-bold">{{ profile.date_joined }}</span>
+            </li>
+            <li>
+                Last login: <span class="font-weight-bold">{{ profile.last_login }}</span>
+            </li>
+        </ul>
+    </div>
+</div>

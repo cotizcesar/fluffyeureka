@@ -1,12 +1,15 @@
 {% load i18n %}
 <div class="bg-dark p-3 rounded">
     <ul class="nav flex-column mb-3">
-        <h2 class="h5"><i class="fas fa-user fa-fw mr-1"></i> {% trans "Profile" %}</h2>
+        <h2 class="h5"><i class="fas fa-user fa-fw mr-1"></i> {% trans "Settings" %}</h2>
         <li class="nav-item">
-            <a class="nav-link{% if request.resolver_match.url_name == 'userprofile_basic' %} text-light{% endif %}" href="{% url 'userprofile_basic' %}"><i class="fas fa-signature fa-fw mr-1"></i> {% trans "Name" %}</a>
+            <a class="nav-link{% if request.resolver_match.url_name == 'userprofile_basic' %} text-light{% endif %}" href="{% url 'userprofile_basic' %}"><i class="fas fa-signature fa-fw mr-1"></i> {% trans "Basic" %}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link{% if request.resolver_match.url_name == 'userprofile_advanced' %} text-light{% endif %}" href="{% url 'userprofile_advanced' %}"><i class="fas fa-address-card fa-fw mr-1"></i> {% trans "Avatar & Header" %}</a>
+            <a class="nav-link{% if request.resolver_match.url_name == 'userprofile_advanced' %} text-light{% endif %}" href="{% url 'userprofile_advanced' %}"><i class="fas fa-address-card fa-fw mr-1"></i> {% trans "Advanced" %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if request.resolver_match.url_name == 'userprofile_game' %} text-light{% endif %}" href="{% url 'userprofile_game' %}"><i class="fas fa-gamepad fa-fw mr-1"></i> {% trans "Game" %}</a>
         </li>
     </ul>
     <ul class="nav flex-column">

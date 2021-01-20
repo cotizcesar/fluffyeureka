@@ -20,11 +20,21 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ("avatar", "biography", "game")
+        fields = ("header", "avatar", "biography")
         help_texts = {
+            "header": "Only images in JPG and PNG are allowed.",
             "avatar": "Only images in JPG and PNG are allowed.",
             "biography": "Use this space for text, you have a limit of 160 characters.",
-            "game": "Select the game you like.",
+        }
+
+
+class UserProfileGameForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ("favorite_game", "is_public")
+        help_texts = {
+            "favorite_game": "Select the game you like.",
+            "is_public": "If you don't want to share your friend code publicly to unregistered users, uncheck this checkbox.",
         }
 
 

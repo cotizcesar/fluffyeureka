@@ -16,10 +16,14 @@
 					<div class="row">
 						{% if object_list %}
 							{% for object in object_list %}
-								<div class="col-md-6">
-									{% include 'components/user_thumb.html' %}
+								<div class="col-md-4">
+									{% include 'components/user_thumb_members.html' %}
 								</div>
 							{% endfor %}
+						{% else %}
+							<div class="alert alert-info" role="alert">
+								<i class="fas fa-info-circle fa-fw"></i> There is no members to show.
+							</div>
 						{% endif %}
 					</div>
 					{% if is_paginated %}

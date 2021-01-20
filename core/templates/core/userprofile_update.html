@@ -12,11 +12,15 @@
                 <div class="col-md-6">
                     <div class="bg-dark p-3 rounded">
                         {% if request.resolver_match.url_name == 'userprofile_basic' %}
-                            <h1 class="h3"><i class="fas fa-cogs fa-fw text-info mr-1"></i> Basic Settings</h1>
-                            <p class="text-muted m-0">Feel free to change what you want here. It's your account, it's your data. <strong>Remember, the data entered here will be public, the only private data will be your password and email.</strong></p>
+                            <h1 class="h4"><i class="fas fa-cogs fa-fw text-info mr-1"></i> Basic Settings</h1>
+                            <p class="small text-muted m-0">Here you can only change your name and surname which will be displayed publicly.</p>
                             <hr>
                         {% elif request.resolver_match.url_name == 'userprofile_advanced' %}
-                            <h1 class="h3"><i class="fas fa-user-circle text-info fa-fw mr-1"></i> Advanced Settings</h1>
+                            <h1 class="h4"><i class="fas fa-user-circle text-info fa-fw mr-1"></i> Advanced Settings</h1>
+                            <p class="small text-muted m-0">If you want to change the header, the avatar or the biography this is the place. It is simple, easy and fast.</p>
+                            <hr>
+                        {% elif request.resolver_match.url_name == 'userprofile_game' %}
+                            <h1 class="h3"><i class="fas fa-gamepad text-info fa-fw mr-1"></i> Game Settings</h1>
                             <p class="text-muted m-0">Here you can change the extra data of your profile, such as avatar, biography and more. Please try not to break the rules of the site. <strong>Remember, the data entered here will be public, the only private data will be your password and email.</strong></p>
                             <hr>
                         {% endif %}
