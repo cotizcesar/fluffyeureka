@@ -29,10 +29,10 @@ class Index(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
-        context["games"] = Game.objects.all().order_by("title")[:10]
-        context["users_date_joined"] = User.objects.all().order_by("-date_joined")[:10]
-        context["users_last_login"] = User.objects.exclude(Q(userprofile__favorite_game__isnull=True) | Q(userprofile__nintendo_switch_code__isnull=True) | Q(userprofile__is_public=False)).order_by("-last_login")[:10]
-        context["dodos"] = Dodo.objects.all()[:10]
+        context["games"] = Game.objects.all().order_by("title")[:5]
+        context["users_date_joined"] = User.objects.all().order_by("-date_joined")[:5]
+        context["users_last_login"] = User.objects.exclude(Q(userprofile__favorite_game__isnull=True) | Q(userprofile__nintendo_switch_code__isnull=True) | Q(userprofile__is_public=False)).order_by("-last_login")[:5]
+        context["dodos"] = Dodo.objects.all()[:5]
         return context
 
 
