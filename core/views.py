@@ -36,8 +36,8 @@ class Index(TemplateView):
         context["games"] = Game.objects.filter(userprofile__is_public=True).order_by(
             "title"
         )[:20]
-        context['dodo_codes'] = Dodo.objects.filter()[:20]
-        print(context.get('dodo_codes'))
+        context["dodo_codes"] = Dodo.objects.filter()[:20]
+        print(context.get("dodo_codes"))
         return context
 
 
