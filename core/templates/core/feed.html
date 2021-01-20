@@ -30,6 +30,7 @@
                 <div class="col-md-4">
                     {% if user.is_authenticated %}
                         <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> Post</a>
+                        {% include 'components/userprofile_completion.html' %}
                         {% if user.userprofile.favorite_game.slug == 'animal-crossing-new-horizons' %}
                             <div class="bg-dark rounded my-3">
                                 <h2 class="h6 pt-3 px-3"><i class="fas fa-gamepad fa-fw text-info mr-1"></i> {{ user.userprofile.favorite_game.title }}</h2>
