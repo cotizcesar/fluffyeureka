@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.discord",
+    "allauth.socialaccount.providers.facebook",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.twitch",
     "allauth.socialaccount.providers.twitter",
@@ -198,20 +199,48 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_USERNAME_BLACKLIST = ["admin", "cotizcesar"]
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_MIN_LENGTH = 6
-ACCOUNT_USERNAME_VALIDATORS = 'core.validators.custom_usename_validator'
+ACCOUNT_USERNAME_VALIDATORS = "core.validators.custom_usename_validator"
 REGISTRATION_OPEN = True
 
 THUMBNAIL_TRANSPARENCY_EXTENSION = "png"
 THUMBNAIL_ALIASES = {
     "": {
-        "123x123": {"size": (123, 123), "crop": "smart", "upscale": True}, # User profile avatar
-        "920x258": {"size": (920, 258), "crop": "smart", "upscale": True}, # User profile header
-        "1200x630": {"size": (1200, 630), "crop": "smart", "upscale": True}, # User profile header (Facebook OG)
-        "1200x600": {"size": (1200, 600), "crop": "smart", "upscale": True}, # User profile header (Twitter OG)
-        "350x98": {"size": (350, 98), "crop": "smart", "upscale": True}, # Members (thumb)
-        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True}, # Post image
-        "48x48": {"size": (48, 48), "crop": "smart", "upscale": True}, # User profile avatar (thumb)
-        "154x86": {"size": (154, 86), "crop": "smart", "upscale": True}, # Index Game avatar (thumb)
+        "123x123": {
+            "size": (123, 123),
+            "crop": "smart",
+            "upscale": True,
+        },  # User profile avatar
+        "920x258": {
+            "size": (920, 258),
+            "crop": "smart",
+            "upscale": True,
+        },  # User profile header
+        "1200x630": {
+            "size": (1200, 630),
+            "crop": "smart",
+            "upscale": True,
+        },  # User profile header (Facebook OG)
+        "1200x600": {
+            "size": (1200, 600),
+            "crop": "smart",
+            "upscale": True,
+        },  # User profile header (Twitter OG)
+        "350x98": {
+            "size": (350, 98),
+            "crop": "smart",
+            "upscale": True,
+        },  # Members (thumb)
+        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},  # Post image
+        "48x48": {
+            "size": (48, 48),
+            "crop": "smart",
+            "upscale": True,
+        },  # User profile avatar (thumb)
+        "154x86": {
+            "size": (154, 86),
+            "crop": "smart",
+            "upscale": True,
+        },  # Index Game avatar (thumb)
         "120x120": {"size": (120, 120), "crop": "smart", "upscale": True},
         "465x": {"size": (465, 0), "crop": "smart", "upscale": True},
         "36x36": {"size": (36, 36), "crop": "smart", "upscale": True},
@@ -256,6 +285,27 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 SOCIALACCOUNT_PROVIDERS = {
     "discord": {"SCOPE": ["identify", "email", "guilds"]},
+    "facebook": {
+        "METHOD": "oauth2",
+        "SDK_URL": "//connect.facebook.net/{locale}/sdk.js",
+        "SCOPE": ["email", "public_profile"],
+        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
+        "INIT_PARAMS": {"cookie": True},
+        "FIELDS": [
+            "id",
+            "first_name",
+            "last_name",
+            "middle_name",
+            "name",
+            "name_format",
+            "picture",
+            "short_name",
+        ],
+        "EXCHANGE_TOKEN": True,
+        "LOCALE_FUNC": "path.to.callable",
+        "VERIFIED_EMAIL": False,
+        "VERSION": "v7.0",
+    },
     "google": {
         "SCOPE": ["profile", "email",],
         "AUTH_PARAMS": {"access_type": "online",},
