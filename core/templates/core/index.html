@@ -6,21 +6,19 @@
     <div class="home">
         <div class="container my-3">
             {% if not user.is_authenticated %}
-            <div class="jumbotron bg-light rounded w-100 my-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <img class="img-fluid rounded" src="{% static 'img/index__jumbotron.jpg' %}">
-                        </div>
-                        <div class="col-md-6">
-                            <h1 class="display-4">Hello gamer!</h1>
-                            <p class="lead">This site was created in order to share friend codes for the nintendo switch platform.</p>
-                            <hr class="my-3">
-                            <p>If you want to start sharing, you need to create an account and fill out some necessary fields to start sharing.</p>
-                            <a class="btn btn-info" href="{% url 'account_signup' %}" role="button"><i class="fas fa-sign-in-alt fa-fw mr-1"></i> Sign up</a>
-                        </div>
-                    </div>                    
-                </div> 
+            <div class="jumbotron bg-light rounded w-100 p-3 my-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img-fluid rounded" src="{% static 'img/index__jumbotron.jpg' %}">
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="display-4 mt-2">Hello gamer!</h1>
+                        <p class="lead">This site was created in order to share friend codes for the nintendo switch platform.</p>
+                        <hr class="my-3">
+                        <p>If you want to start sharing, you need to create an account and fill out some necessary fields to start sharing.</p>
+                        <a class="btn btn-info" href="{% url 'account_signup' %}" role="button"><i class="fas fa-sign-in-alt fa-fw mr-1"></i> Sign up</a>
+                    </div>
+                </div>                    
             </div>
             {% endif %}
             <div class="row">
