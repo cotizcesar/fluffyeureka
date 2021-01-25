@@ -220,7 +220,7 @@ User:
 - 350x98: Header (Members)
 
 Game:
-- 154x86: Game Avatar (Index)
+- 155x86: Game Avatar (Index)
 """
 THUMBNAIL_ALIASES = {
     "": {
@@ -231,7 +231,7 @@ THUMBNAIL_ALIASES = {
         "350x98": { "size": (350, 98), "crop": "smart", "upscale": True},
         "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},
         "48x48": { "size": (48, 48), "crop": "smart", "upscale": True},
-        "154x86": { "size": (154, 86), "crop": "smart", "upscale": True},
+        "155x86": { "size": (155, 86), "crop": "smart", "upscale": True},
         "warframe_list": {"size": (510, 287), "crop": "0,0", "upscale": True},
     },
 }
