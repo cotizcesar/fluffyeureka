@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["fluffyeureka.com", ".fluffyeureka.com", '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -131,8 +132,20 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = BASE_DIR / "staticfiles"  # . os.path.join(BASE_DIR, 'staticfiles')
+
+# The URL to use when referring to static files (where they will be served from)
 STATIC_URL = "/static/"
+
+# This lists additional directories that Django's collectstatic tool should search for static files.
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
@@ -228,10 +241,10 @@ THUMBNAIL_ALIASES = {
         "920x258": {"size": (920, 258), "crop": "smart", "upscale": True},
         "1200x630": {"size": (1200, 630), "crop": "smart", "upscale": True},
         "1200x600": {"size": (1200, 600), "crop": "smart", "upscale": True},
-        "350x98": { "size": (350, 98), "crop": "smart", "upscale": True},
+        "350x98": {"size": (350, 98), "crop": "smart", "upscale": True},
         "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},
-        "48x48": { "size": (48, 48), "crop": "smart", "upscale": True},
-        "155x86": { "size": (155, 86), "crop": "smart", "upscale": True},
+        "48x48": {"size": (48, 48), "crop": "smart", "upscale": True},
+        "155x86": {"size": (155, 86), "crop": "smart", "upscale": True},
         "warframe_list": {"size": (510, 287), "crop": "0,0", "upscale": True},
     },
 }
@@ -267,3 +280,9 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES["default"].update(db_from_env)
