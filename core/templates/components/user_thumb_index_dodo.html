@@ -1,5 +1,5 @@
+{% load humanize %}
 {% load thumbnail %}
-{% load custom_filters %}
 <div class="userthumb-home mb-3">
     <div class="media">
         <a href="{% url 'userprofile' object.user.username %}">
@@ -14,11 +14,11 @@
                     </small>
                 </a>
             </h6>
-            <span class="badge badge-danger">{{ object.user.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
+            <p class="small text-muted m-0"><i class="far fa-clock fa-fw fa-xs"></i> {{ object.date_updated|naturaltime }}</p>
         </div>
         {% if object.user.userprofile.favorite_game %}
             <div class="media-body text-right small my-2">
-                <p class="h4 mb-0 text-success font-weight-bold">{{ object.code|upper }}</p>
+                <p class="h4 mb-0 text-success font-weight-bold text-uppercase">{{ object.code }}</p>
             </div>
         {% endif %}
     </div>
