@@ -35,7 +35,7 @@ class UserProfileGameForm(forms.ModelForm):
         help_texts = {
             "favorite_game": "Select the game you like.",
             "is_public": "If you don't want to share your friend code publicly to unregistered users, uncheck this checkbox.",
-            "nintendo_switch_code": "Add your friend code from your Nintendo Switch so that members can add you.",
+            "nintendo_switch_code": "Add your friend code from your Nintendo Switch so that members can add you, only numbers. EX: 577653468978",
         }
 
 
