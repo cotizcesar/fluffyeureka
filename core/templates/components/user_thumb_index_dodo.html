@@ -17,9 +17,8 @@
             <span class="badge badge-danger">{{ object.user.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
         </div>
         {% if object.user.userprofile.favorite_game %}
-            <div class="media-body text-right small mt-2">
-                <h6 class="my-0">Dodo code</h6>
-                <p class="mb-0 text-success font-weight-bold">{{ object.code|upper }}</p>
+            <div class="media-body text-right small my-2">
+                <p class="h4 mb-0 text-success font-weight-bold">{{ object.code|upper }}</p>
             </div>
         {% endif %}
     </div>
