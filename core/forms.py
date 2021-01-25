@@ -58,3 +58,8 @@ class DodoForm(forms.ModelForm):
             "code",
             "image",
         )
+        help_texts = {
+            "text": "Use this space for text, you have a limit of 280 characters.",
+            "code": "Add your dodo code from your Animal Crossing so that members can connect with you, only 5 characters. EX: FYJ1D",
+            "image": "Only images in JPG and PNG are allowed.",
+        }
