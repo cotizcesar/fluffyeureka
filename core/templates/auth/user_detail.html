@@ -4,6 +4,20 @@
 {% load static %}
 {% load custom_filters %}
 {% block title %}{% if profile.get_full_name %}{{ profile.get_full_name }}{% else %}{{ profile.username }}{% endif %} (@{{ profile.username }}) - Fluffyeureka{% endblock %}
+{% block meta_extra %}
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% if profile.get_full_name %}{{ profile.get_full_name }}{% else %}{{ profile.username }}{% endif %} (@{{ profile.username }}) - Fluffyeureka" />
+    <meta property="og:description" content="{% if profile.userprofile.biography %}{{ profile.userprofile.biography }}{% else %}Share your DodoCodes with the Animal Crossing: New Horizons community! Sell your turnips, visit other islands and make friends with other ACNH players online.{% endif %}" />
+    <meta property="og:image" content="{{ profile.userprofile.header|thumbnail_url:'1200x630'|default:'https://via.placeholder.com/1200x630' }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@cotizcesar" />
+    <meta name="twitter:creator" content="@cotizcesar" />
+    <meta name="twitter:description" content="{% if profile.userprofile.biography %}{{ profile.userprofile.biography }}{% else %}Share your DodoCodes with the Animal Crossing: New Horizons community! Sell your turnips, visit other islands and make friends with other ACNH players online.{% endif %}">
+    <meta name="twitter:image" content="{{ profile.userprofile.header|thumbnail_url:'1200x600'|default:'https://via.placeholder.com/1200x600' }}">
+    <meta name="twitter:image:alt" content="{% if profile.userprofile.biography %}{{ profile.userprofile.biography }}{% else %}Share your DodoCodes with the Animal Crossing: New Horizons community! Sell your turnips, visit other islands and make friends with other ACNH players online.{% endif %}">
+    <meta name="twitter:title" content="{% if profile.get_full_name %}{{ profile.get_full_name }}{% else %}{{ profile.username }}{% endif %} (@{{ profile.username }}) - Fluffyeureka">
+{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/components.css' %}">
 {% endblock %}
@@ -13,14 +27,14 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <img class="header img-fluid rounded-top"
-                        src="{{ profile.userprofile.header|thumbnail_url:'920x517'|default:'https://via.placeholder.com/920x517' }}"
+                        src="{{ profile.userprofile.header|thumbnail_url:'920x258'|default:'https://via.placeholder.com/920x258' }}"
                         alt="{% if profile.get_full_name %}{{ profile.get_full_name }} - @{{ profile.username }}{% else %}@{{ profile.username }}{% endif %} header.
                     ">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-10 offset-md-1">
-                    <div class="bg-dark rounded-bottom p-3">
+                    <div class="bg-light rounded-bottom p-3">
                         <div class="row">
                             <div class="col-md-2">
                                 <img class="avatar img-fluid rounded" src="{{ profile.userprofile.avatar|thumbnail_url:'123x123'|default:'https://via.placeholder.com/123x123' }}" alt="{% if profile.get_full_name %}{{ profile.get_full_name }} - @{{ profile.username }}{% else %}@{{ profile.username }}{% endif %} avatar.">
@@ -33,24 +47,7 @@
                                     </small>
                                 </h1>
                                 {% if profile.userprofile.biography %}
-                                    <p class="biography small mb-1">{{ profile.userprofile.biography }}</p>
-                                {% endif %}
-                                {% if profile.userprofile.game %}
-                                    <p class="game small mb-1">Game: {{ profile.userprofile.game }}</p>
-                                {% endif %}
-                                {% if profile.userprofile.is_public %}
-                                    {% if profile.userprofile.nintendo_switch_code %}
-                                        <span class="badge badge-danger mb-1">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
-                                    {% endif %}
-                                {% else %}
-                                    {% if user.is_authenticated %}
-                                        {% if profile.userprofile.nintendo_switch_code %}
-                                            <span class="badge badge-danger">{{ profile.userprofile.nintendo_switch_code|switch_code_formatter:'switch' }}</span>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}
-                                {% if profile.last_login %}
-                                    <p class="lastlogin text-muted small mb-0">Last seen: {{ profile.last_login }}</p>
+                                    <p class="biography mb-1">{{ profile.userprofile.biography }}</p>
                                 {% endif %}
                                 <div class="row mt-3">
                                     <div class="col-md-12">
@@ -113,10 +110,23 @@
                 <div class="col-md-4">
                     {% if user.is_authenticated %}
                         {% if user.username == profile.username %}
-                            <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Post</a>
+                            <a class="btn btn-info btn-lg btn-block mb-3" href="{% url 'post_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> Post</a>
+                            {% if profile.userprofile.favorite_game %}
+                                {% if profile.userprofile.favorite_game.slug == 'animal-crossing-new-horizons' %}
+                                    <div class="bg-light rounded my-3">
+                                        <h2 class="h6 pt-3 px-3"><i class="fas fa-gamepad fa-fw text-info mr-1"></i> {{ profile.userprofile.favorite_game.title }}</h2>
+                                        <hr>
+                                        <div class="pb-3 px-3">
+                                            <p class="small">Since you selected <strong>{{ profile.userprofile.favorite_game.title }}</strong> as your favorite game, new options for sharing dodo codes have been activated.</p>
+                                            <a class="btn btn-success btn-block" href="{% url 'dodo_create' %}" role="button"><i class="fas fa-plus fa-fw"></i> New Dodo code</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                            {% include 'components/user_detail_information.html' %}
+                            {% include 'components/userprofile_completion.html' %}
                         {% endif %}
                     {% endif %}
-                    Block for recomendations and more. Or maybe ads idk. (WIP)
                 </div>
             </div>
         </div>

@@ -16,6 +16,12 @@ from autoslug import AutoSlugField
 class Game(models.Model):
     title = models.CharField(max_length=140)
     slug = AutoSlugField(populate_from="title", unique=True, blank=True)
+    header = models.ImageField(
+        upload_to="games/header", default="games/header/default.png", blank=True
+    )
+    avatar = models.ImageField(
+        upload_to="games/avatar", default="games/avatar/default.png", blank=True
+    )
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
@@ -37,7 +43,7 @@ class UserProfile(models.Model):
         blank=True,
         null=True,
     )
-    game = models.OneToOneField(Game, on_delete=models.PROTECT, blank=True, null=True)
+    favorite_game = models.ForeignKey(Game, on_delete=models.PROTECT, blank=True, null=True)
     is_public = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)
 

@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{% url 'index' %}"><i class="fas fa-address-card fa-fw text-info mr-1"></i> Fluffyeureka</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{% url 'userprofile' user.username %}"><i class="far fa-address-card fa-fw"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw"></i> Settings</a>
+                                <a class="dropdown-item" href="{% url 'userprofile_basic' %}"><i class="fas fa-cog fa-fw"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt fa-fw"></i> Log out</a>
                             </div>

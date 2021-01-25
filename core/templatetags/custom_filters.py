@@ -29,23 +29,23 @@ def number_formatter(value, num_decimals=2):
 
 @register.filter
 def switch_code_formatter(value, type):
-    """
-    Django template filter to convert regular numbers to a
-    cool format (ie: 2K, 434.4K, 33M...)
-    :param value: number
-    :param num_decimals: Number of decimal digits
-    Source: https://gist.github.com/dnmellen/bfc1b3005999aaff3ed4
-    """
-
     result = None
 
     try:
         if value:
             if type == "switch":
                 value = str(value)
-                value1 = value[0:4]
-                value2 = value[4:8]
-                value3 = value[8:12]
+
+                if len(value) == 12:
+                    value1 = value[0:4]
+                    value2 = value[4:8]
+                    value3 = value[8:12]
+
+                elif len(value) < 12 and len(value) > 10:
+                    value1 = "0" + value[0:3]
+                    value2 = value[3:7]
+                    value3 = value[7:11]
+
 
                 if value1 and value2 and value3:
                     result = "SW-" + value1 + "-" + value2 + "-" + value3

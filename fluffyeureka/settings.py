@@ -45,16 +45,16 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.twitch",
     "allauth.socialaccount.providers.twitter",
-    # easy-thumbnails: Application Added.
+    # easy-thumbnails:
     # https://easy-thumbnails.readthedocs.io/en/latest/install/#configuring-your-project
     "easy_thumbnails",
-    # django-import-export: Application Added.
+    # django-import-export:
     # https://django-import-export.readthedocs.io/en/latest/installation.html#installation-and-configuration
     "import_export",
-    # django-bootstrap4: Application Added.
+    # django-bootstrap4:
     # https://django-bootstrap4.readthedocs.io/en/latest/installation.html
     "bootstrap4",
-    # django-storages: Application Added.
+    # django-storages:
     # https://django-storages.readthedocs.io/en/latest/index.html#installation
     "storages",
     "core",
@@ -111,9 +111,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
@@ -187,66 +193,48 @@ LOGIN_REDIRECT_URL = "feed"
 
 # django-allauth: General Configuration
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-ACCOUNT_EMAIL_REQUIRED = True  # Change for True in Production
-ACCOUNT_EMAIL_VERIFICATION = "optional"  # Change for mandatory in Production
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"  # Change for https in Production
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
-ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
-ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 ACCOUNT_LOGOUT_REDIRECT_URL = "index"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
-ACCOUNT_USERNAME_BLACKLIST = ["admin", "ordis", "cotizcesar", "Warframe"]
+ACCOUNT_USERNAME_BLACKLIST = ["admin", "cotizcesar"]
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_MIN_LENGTH = 6
-REGISTRATION_OPEN = False  # Change for True in Production
+ACCOUNT_USERNAME_VALIDATORS = "core.validators.custom_usename_validator"
+REGISTRATION_OPEN = True
 
 THUMBNAIL_TRANSPARENCY_EXTENSION = "png"
+
+"""
+THUMBNAIL_ALIASES
+
+User:
+- 540x303: Posts
+- 48x48: Avatar
+- 123x123: Avatar (UserProfile)
+- 920x258: Header (UserProfile)
+- 1200x630: Header (Facebook Opengraph)
+- 1200x600: Header (Twitter Opengraph)
+- 350x98: Header (Members)
+
+Game:
+- 154x86: Game Avatar (Index)
+"""
 THUMBNAIL_ALIASES = {
     "": {
-        "123x123": {
-            "size": (123, 123),
-            "crop": "smart",
-            "upscale": True,
-        },  # UserProfile Avatar
-        "920x517": {
-            "size": (920, 517),
-            "crop": "smart",
-            "upscale": True,
-        },  # UserProfile Header
-        "524x294": {
-            "size": (524, 294),
-            "crop": "smart",
-            "upscale": True,
-        },  # Members Header
-        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},  # Post Image
-        "120x120": {"size": (120, 120), "crop": "smart", "upscale": True},
-        "465x": {"size": (465, 0), "crop": "smart", "upscale": True},
-        "36x36": {"size": (36, 36), "crop": "smart", "upscale": True},
-        "475x125": {"size": (475, 125), "crop": "smart", "upscale": True},
-        "48x48": {"size": (48, 48), "crop": "smart", "upscale": True},
-        "283x": {"size": (283, 0), "crop": "smart", "upscale": True},
-        "298x167": {"size": (298, 167), "crop": "smart", "upscale": True},
-        "559x": {"size": (559, 0), "crop": "smart", "upscale": True},
+        "123x123": {"size": (123, 123), "crop": "smart", "upscale": True},
+        "920x258": {"size": (920, 258), "crop": "smart", "upscale": True},
         "1200x630": {"size": (1200, 630), "crop": "smart", "upscale": True},
-        "avatar": {"size": (510, 510), "crop": "smart", "upscale": True},
-        "post": {"size": (540, 0), "crop": "smart", "upscale": True},
-        "order": {"size": (74, 74), "crop": "smart", "upscale": True},
-        "item": {"size": (510, 287), "crop": "smart", "upscale": True},
-        "warframe": {"size": (510, 906), "crop": "smart", "upscale": True},
-        "warframe_detail": {"size": (510, 906), "crop": "smart", "upscale": True},
+        "1200x600": {"size": (1200, 600), "crop": "smart", "upscale": True},
+        "350x98": { "size": (350, 98), "crop": "smart", "upscale": True},
+        "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},
+        "48x48": { "size": (48, 48), "crop": "smart", "upscale": True},
+        "154x86": { "size": (154, 86), "crop": "smart", "upscale": True},
         "warframe_list": {"size": (510, 287), "crop": "0,0", "upscale": True},
-        "warframe_market_list": {"size": (510, 287), "crop": "0,0", "upscale": True},
-        "warframe_50x50": {"size": (50, 50), "crop": "0,0", "upscale": True},
-        "44x44": {"size": (44, 44), "crop": "smart", "upscale": True},
-        "50x50": {"size": (50, 50), "crop": "smart", "upscale": True},
-        "66x66": {"size": (66, 66), "crop": "smart", "upscale": True},
-        "warframe_66x66": {"size": (66, 66), "crop": "0,0", "upscale": True},
-        "89x89": {"size": (89, 89), "crop": "smart", "upscale": True},
-        "510x287": {"size": (510, 287), "crop": "smart", "upscale": True},
     },
 }
 THUMBNAIL_NAMER = "easy_thumbnails.namers.hashed"
@@ -269,8 +257,13 @@ AWS_S3_OBJECT_PARAMETERS = {
 SOCIALACCOUNT_PROVIDERS = {
     "discord": {"SCOPE": ["identify", "email", "guilds"]},
     "google": {
-        "SCOPE": ["profile", "email",],
-        "AUTH_PARAMS": {"access_type": "online",},
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
     },
     "twitch": {"SCOPE": ["user_read"]},
 }

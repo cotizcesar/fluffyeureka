@@ -6,10 +6,6 @@ from django.contrib.auth.models import User
 #! Core: Models
 from .models import UserProfile, Post, Dodo
 
-from allauth.account.forms import SignupForm
-
-from .validators import username_validator
-
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -24,24 +20,41 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ("avatar", "biography")
+        fields = ("header", "avatar", "biography")
         help_texts = {
+            "header": "Only images in JPG and PNG are allowed.",
             "avatar": "Only images in JPG and PNG are allowed.",
             "biography": "Use this space for text, you have a limit of 160 characters.",
+        }
+
+
+class UserProfileGameForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ("nintendo_switch_code", "favorite_game", "is_public")
+        help_texts = {
+            "favorite_game": "Select the game you like.",
+            "is_public": "If you don't want to share your friend code publicly to unregistered users, uncheck this checkbox.",
+            "nintendo_switch_code": "Add your friend code from your Nintendo Switch so that members can add you.",
         }
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("text", "image")
+        fields = ("text", "image", "video")
         help_texts = {
             "text": "Use this space for text, you have a limit of 280 characters.",
             "image": "Only images in JPG and PNG are allowed.",
             "video": "Copy and paste an URL from the following sites: YouTube.com, Twitch.tv, Vimeo.com or Giphy.com.",
         }
 
+
 class DodoForm(forms.ModelForm):
     class Meta:
         model = Dodo
-        fields = ("text", "code", "image", )
+        fields = (
+            "text",
+            "code",
+            "image",
+        )

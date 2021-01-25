@@ -1,0 +1,65 @@
+{% if not user.first_name or not user.last_name or not user.userprofile.nintendo_switch_code or not user.userprofile.favorite_game or not user.userprofile.avatar or not user.userprofile.header or not user.userprofile.biography %}
+<div class="bg-light rounded my-3">
+    <h2 class="h6 pt-3 px-3"><i class="fas fa-info-circle fa-fw text-info mr-1"></i> Complete your Profile</h2>
+    <hr>
+    <div class="pb-3 px-3">
+        <p class="small">In order to publish your profile in the <strong>list of members on the main page</strong> we need you to fill in the following information:</p>
+        <ul class="list-style-none m-0 p-0">
+            {% if not user.first_name %}
+                <li>
+                    <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'userprofile_basic' %}">First name</a>
+                </li>
+            {% endif %}
+            {% if not user.last_name %}
+                <li>
+                    <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'userprofile_basic' %}">Last name</a>
+                </li>
+            {% endif %}
+            {% if not user.userprofile.nintendo_switch_code %}
+            <li>
+                <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'userprofile_game' %}">Nintendo Switch Code</a>
+            </li>
+            {% endif %}
+            {% if not user.userprofile.favorite_game %}
+                <li>
+                    <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'userprofile_game' %}">Favorite Game</a>
+                </li>
+                <li>
+                    <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'userprofile_game' %}">If your profile is public or not</a>
+                </li>
+            {% endif %}
+            {% if not user.userprofile.avatar %}
+                <li>
+                    <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'userprofile_advanced' %}">Avatar</a>
+                </li>
+            {% endif %}
+            {% if not user.userprofile.header %}
+                <li>
+                    <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'userprofile_advanced' %}">Header</a>
+                </li>
+            {% endif %}
+            {% if not user.userprofile.biography %}
+                <li>
+                    <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'userprofile_advanced' %}">Biography</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% else %}
+<div class="bg-light rounded my-3">
+    <h2 class="h6 pt-3 px-3"><i class="fas fa-info-circle fa-fw text-info mr-1"></i> What to do next?</h2>
+    <hr>
+    <div class="pb-3 px-3">
+        <p class="small">We give you the following recommendations so that you can enjoy our service even more.</p>
+        <ul class="small list-style-none m-0 p-0">
+            <li class="my-2">                    
+                <i class="fas fa-chevron-right fa-fw"></i> Follow more community members by visiting the <a href="{% url 'members' %}">members</a> page.
+            </li>
+            <li>                
+                <i class="fas fa-chevron-right fa-fw"></i> <a href="{% url 'dodo_create' %}">Share dodo codes</a> by adding Animal Crossing: Hew Horizons as your <a href="{% url 'userprofile_game' %}">favorite game</a>.
+            </li>
+        </ul>
+    </div>
+</div>
+{% endif %}

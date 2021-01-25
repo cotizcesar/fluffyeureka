@@ -1,30 +1,36 @@
-{% load bootstrap4 %}
 {% load static %}
+{% load bootstrap4 %}
+{% load thumbnail %}
 {% load account socialaccount %}
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>{% block title %}Fluffyeureka - {% block head_title %}Home{% endblock %}{% endblock %}</title>
-
+		<title>{% block title %}Fluffyeureka - {% block head_title %}Share your Dodo Codes with the Animal Crossing community{% endblock %}{% endblock %}</title>
+		<meta name="description" content="Share your DodoCodes with the Animal Crossing: New Horizons community! Sell your turnips, visit other islands and make friends with other ACNH players online.">
+		<meta name="keywords" content="Nintendo Switch, Animal Crossing, Dodo codes, Friend codes, New Horizons, ACNH">
+		<meta name="author" content="Cesar Cotiz">
 		{% block meta_extra %}
 			<meta property="og:url" content="{{ request.build_absolute_uri }}" />
 			<meta property="og:type" content="website" />
-			<meta property="og:title" content="fluffyeureka.app" />
-			<meta property="og:description" content="Nintendo FC sharer for any game!" />
-			<meta property="og:image" content="{% static 'img/opengraph-default.png' %}" />
+			<meta property="og:title" content="Fluffyeureka - Share your Dodo Codes with the Animal Crossing community" />
+			<meta property="og:description" content="Share your DodoCodes with the Animal Crossing: New Horizons community! Sell your turnips, visit other islands and make friends with other ACNH players online." />
+			<meta property="og:image" content="{% static 'img/index__jumbotron.jpg' %}" />
+			<meta name="twitter:description" content="Share your DodoCodes with the Animal Crossing: New Horizons community! Sell your turnips, visit other islands and make friends with other ACNH players online.">
+			<meta name="twitter:image" content="{% static 'img/index__jumbotron.jpg' %}">
+			<meta name="twitter:image:alt" content="Share your DodoCodes with the Animal Crossing: New Horizons community! Sell your turnips, visit other islands and make friends with other ACNH players online.">
+			<meta name="twitter:title" content="Fluffyeureka - Share your Dodo Codes with the Animal Crossing community">
 		{% endblock %}
-		<meta name="twitter:card" content="app" />
+		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@cotizcesar" />
 		<meta name="twitter:creator" content="@cotizcesar" />
-
 		{% bootstrap_css %}
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
 		{% block extra_head %}{% endblock %}
 	</head>
-	<body class="bg-dark text-light">
+	<body class="text-dark">
 		{% block body %}
 		{% block header %}{% include 'header.html' %}{% endblock %}
 

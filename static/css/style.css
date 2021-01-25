@@ -12,7 +12,7 @@ a:hover {
     opacity: 0.7;
 }
 
-.bg-darker {
+.bg-lighter {
     background: #2e3439;
 }
 
@@ -31,4 +31,7 @@ a:hover {
 .btn-twitter {
     background: #1da1f2;
     color: #fff;
+}
+.list-style-none {
+    list-style: none;
 }
