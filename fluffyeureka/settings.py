@@ -240,7 +240,7 @@ THUMBNAIL_ALIASES = {
         "350x98": {"size": (350, 98), "crop": "smart", "upscale": True},
         "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},
         "48x48": {"size": (48, 48), "crop": "smart", "upscale": True},
-        "155x86": {"size": (155, 86), "crop": "smart", "upscale": True},
+        "478x268": {"size": (478, 268), "crop": "smart", "upscale": True},
         "warframe_list": {"size": (510, 287), "crop": "0,0", "upscale": True},
     },
 }
