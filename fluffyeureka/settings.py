@@ -142,10 +142,6 @@ STATIC_URL = "/static/"
 # This lists additional directories that Django's collectstatic tool should search for static files.
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static/")]
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
@@ -250,7 +246,6 @@ THUMBNAIL_ALIASES = {
 }
 THUMBNAIL_NAMER = "easy_thumbnails.namers.hashed"
 
-"""
 # django-storages
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
@@ -263,7 +258,6 @@ AWS_S3_REGION_NAME = os.environ["AWS_S3_REGION_NAME"]
 AWS_S3_OBJECT_PARAMETERS = {
     "CacheControl": "max-age=86400",
 }
-"""
 
 SOCIALACCOUNT_PROVIDERS = {
     "discord": {"SCOPE": ["identify", "email", "guilds"]},
