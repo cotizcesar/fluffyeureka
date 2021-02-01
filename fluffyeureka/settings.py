@@ -226,10 +226,10 @@ User:
 - 920x258: Header (UserProfile)
 - 1200x630: Header (Facebook Opengraph)
 - 1200x600: Header (Twitter Opengraph)
-- 350x98: Header (Members)
+- 510x286: Header (Members)
 
 Game:
-- 155x86: Game Avatar (Index)
+- 478x268: Game Avatar (Index)
 """
 THUMBNAIL_ALIASES = {
     "": {
@@ -237,7 +237,7 @@ THUMBNAIL_ALIASES = {
         "920x258": {"size": (920, 258), "crop": "smart", "upscale": True},
         "1200x630": {"size": (1200, 630), "crop": "smart", "upscale": True},
         "1200x600": {"size": (1200, 600), "crop": "smart", "upscale": True},
-        "350x98": {"size": (350, 98), "crop": "smart", "upscale": True},
+        "510x286": {"size": (510, 286), "crop": "smart", "upscale": True},
         "540x303": {"size": (540, 303), "crop": "smart", "upscale": True},
         "48x48": {"size": (48, 48), "crop": "smart", "upscale": True},
         "478x268": {"size": (478, 268), "crop": "smart", "upscale": True},
