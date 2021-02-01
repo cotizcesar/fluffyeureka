@@ -35,7 +35,7 @@ class UserProfileGameForm(forms.ModelForm):
         help_texts = {
             "favorite_game": "Select the game you like.",
             "is_public": "If you don't want to share your friend code publicly to unregistered users, uncheck this checkbox.",
-            "nintendo_switch_code": "Add your friend code from your Nintendo Switch so that members can add you.",
+            "nintendo_switch_code": "Add your friend code from your Nintendo Switch so that members can add you, only numbers. EX: 577653468978",
         }
 
 
@@ -58,3 +58,8 @@ class DodoForm(forms.ModelForm):
             "code",
             "image",
         )
+        help_texts = {
+            "text": "Use this space for text, you have a limit of 280 characters.",
+            "code": "Add your dodo code from your Animal Crossing so that members can connect with you, only 5 characters. EX: FYJ1D",
+            "image": "Only images in JPG and PNG are allowed.",
+        }
