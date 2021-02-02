@@ -1,31 +1,42 @@
-{% extends "account/base.html" %}
-
+{% extends "base.html" %}
 {% load i18n %}
 {% load account %}
-
 {% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
-
-
 {% block content %}
-<h1>{% trans "Confirm E-mail Address" %}</h1>
+    <div id="signin">
+        <div class="container my-3">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="bg-light p-3 rounded">
+                        <div class="py-3">
+                            <p class="text-center text-info m-0"><i class="fas fa-info-circle fa-fw fa-5x"></i></p>
+                            <h1 class="text-center mb-3">{% trans "Confirm E-mail Address" %}</h1>
+                            {% if confirmation %}
+                                {% user_display confirmation.email_address.user as user_display %}
 
-{% if confirmation %}
-
-{% user_display confirmation.email_address.user as user_display %}
-
-<p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
-
-<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-{% csrf_token %}
-    <button type="submit">{% trans 'Confirm' %}</button>
-</form>
-
-{% else %}
-
-{% url 'account_email' as email_url %}
-
-<p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
-
-{% endif %}
-
+                                <p class="small">{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+                                <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                                    {% csrf_token %}
+                                    {% bootstrap_form form %}
+                                    {% if redirect_field_value %}
+                                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                    {% endif %}
+                                    {% buttons %}
+                                        <button type="submit" class="btn btn-info btn-sm primaryAction">
+                                            <i class="fas fa-sign-in-alt fa-fw"></i> {% trans 'Confirm' %}
+                                        </button>
+                                    {% endbuttons %}
+                                </form>
+                            {% else %}
+                                {% url 'account_email' as email_url %}
+                                <p class="small">{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
