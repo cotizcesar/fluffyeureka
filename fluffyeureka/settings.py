@@ -223,7 +223,7 @@ User:
 - 540x303: Posts
 - 48x48: Avatar
 - 123x123: Avatar (UserProfile)
-- 920x258: Header (UserProfile)
+- 920x517: Header (UserProfile)
 - 1200x630: Header (Facebook Opengraph)
 - 1200x600: Header (Twitter Opengraph)
 - 510x286: Header (Members)
@@ -234,7 +234,7 @@ Game:
 THUMBNAIL_ALIASES = {
     "": {
         "123x123": {"size": (123, 123), "crop": "smart", "upscale": True},
-        "920x258": {"size": (920, 258), "crop": "smart", "upscale": True},
+        "920x517": {"size": (920, 517), "crop": "smart", "upscale": True},
         "1200x630": {"size": (1200, 630), "crop": "smart", "upscale": True},
         "1200x600": {"size": (1200, 600), "crop": "smart", "upscale": True},
         "510x286": {"size": (510, 286), "crop": "smart", "upscale": True},
@@ -261,12 +261,12 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 # Django: Mailing
 # https://simpleisbetterthancomplex.com/tutorial/2017/05/27/how-to-configure-mailgun-to-send-emails-in-a-django-app.html
-EMAIL_HOST = os.environ["EMAIL_HOST"]
+"""EMAIL_HOST = os.environ["EMAIL_HOST"]
 EMAIL_PORT = os.environ["EMAIL_PORT"]
 EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 EMAIL_USE_TLS = os.environ["EMAIL_USE_TLS"]
-DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
+DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]"""
 
 SOCIALACCOUNT_PROVIDERS = {
     "discord": {"SCOPE": ["identify", "email", "guilds"]},
