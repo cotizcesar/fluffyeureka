@@ -19,10 +19,6 @@
                                 <p class="small">{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
                                 <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
                                     {% csrf_token %}
-                                    {% bootstrap_form form %}
-                                    {% if redirect_field_value %}
-                                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                                    {% endif %}
                                     {% buttons %}
                                         <button type="submit" class="btn btn-info btn-sm primaryAction">
                                             <i class="fas fa-sign-in-alt fa-fw"></i> {% trans 'Confirm' %}
